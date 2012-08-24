@@ -1,0 +1,129 @@
+﻿@model IEnumerable<Mvc3QA.Models.Pts_Records>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            RecordID
+        </th>
+        <th>
+            Pts_Problems
+        </th>
+        <th>
+            CreateUser
+        </th>
+        <th>
+            CreateTime
+        </th>
+        <th>
+            Content
+        </th>
+        <th>
+            Pts_ProblemState
+        </th>
+        <th>
+            RecordClass
+        </th>
+        <th>
+            SrcStateID
+        </th>
+        <th>
+            SrcUserID
+        </th>
+        <th>
+            Course
+        </th>
+        <th>
+            AssignType
+        </th>
+        <th>
+            AssignStateID
+        </th>
+        <th>
+            AssignToObjectID
+        </th>
+        <th>
+            AssignTo
+        </th>
+        <th>
+            ResponseWorkTime
+        </th>
+        <th>
+            ResponseTotalTime
+        </th>
+        <th>
+            RealTimeCost
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.RecordID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pts_Problems.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreateUser)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreateTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Content)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pts_ProblemState.StateName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RecordClass)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SrcStateID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SrcUserID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Course)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AssignType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AssignStateID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AssignToObjectID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AssignTo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ResponseWorkTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ResponseTotalTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RealTimeCost)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

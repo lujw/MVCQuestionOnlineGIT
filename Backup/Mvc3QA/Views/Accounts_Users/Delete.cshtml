@@ -1,0 +1,118 @@
+﻿@model Mvc3QA.Models.Accounts_Users
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Accounts_Users</legend>
+
+    <div class="display-label">UserID</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserID)
+    </div>
+
+    <div class="display-label">Password</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Password)
+    </div>
+
+    <div class="display-label">EmailAddress</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EmailAddress)
+    </div>
+
+    <div class="display-label">DisplayName</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DisplayName)
+    </div>
+
+    <div class="display-label">UserState</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserState)
+    </div>
+
+    <div class="display-label">Accounts_Department</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Accounts_Department.DeptName)
+    </div>
+
+    <div class="display-label">Address</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Address)
+    </div>
+
+    <div class="display-label">OfficePhone</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OfficePhone)
+    </div>
+
+    <div class="display-label">MobilePhone</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MobilePhone)
+    </div>
+
+    <div class="display-label">MSN</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MSN)
+    </div>
+
+    <div class="display-label">PasswordNote</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PasswordNote)
+    </div>
+
+    <div class="display-label">Remark</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Remark)
+    </div>
+
+    <div class="display-label">AccessListID</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AccessListID)
+    </div>
+
+    <div class="display-label">BindIP</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.BindIP)
+    </div>
+
+    <div class="display-label">BindIPString</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.BindIPString)
+    </div>
+
+    <div class="display-label">AgentUserID</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AgentUserID)
+    </div>
+
+    <div class="display-label">ExtendedSettings</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ExtendedSettings)
+    </div>
+
+    <div class="display-label">LoginName</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.LoginName)
+    </div>
+
+    <div class="display-label">ExpireDate</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ExpireDate)
+    </div>
+
+    <div class="display-label">Attributes</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Attributes)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

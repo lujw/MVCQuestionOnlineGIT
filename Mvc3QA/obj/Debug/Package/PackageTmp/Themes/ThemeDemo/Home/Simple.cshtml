@@ -1,0 +1,12 @@
+﻿@model YQBlog.Models.blog_varticle    
+@using res = Resource.Views.Home.Home;    
+@{YQBlog.General.GeneralConfigInfo ci = ViewBag.CI as YQBlog.General.GeneralConfigInfo;} 
+<div class="article-left"></div>
+<div class="article-right"> 
+    <div class="web-path">@res.Path：@Html.ActionLink(res.HomePage, "Index", "Home") \ @Html.Raw(ViewBag.WebPath)</div>
+    <div class="article">
+        <h3 class="article_title hide">@Model.title</h3>
+        <div class="article_summary">@Html.Raw(Model.summary)</div>
+        <div class="article_content">@Html.Raw(Model.content)</div>
+    </div>
+</div>

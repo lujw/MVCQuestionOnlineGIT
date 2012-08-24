@@ -1,0 +1,91 @@
+﻿@using res = Resource.Views.Account.Account;
+@model YQBlog.Models.UserProfileModel  
+@{
+    ViewBag.Title = "User";
+}
+<h2 class="utitle">@ViewBag.uid</h2>
+<div id="ucenter">
+<div class="uoperation">
+<ul>
+<li class="u_index tabbtn u_current">@res.BasicInformation</li>
+</ul>
+</div>
+ <div class="ucontent">
+<!--UserMain-->
+<div class="tabitem" style="display:block;">
+<div class="uitem">@(res.BasicInformation)</div>
+<div class="uinfo">
+<ul>
+<li>
+<img class="uavatar" onerror="this.onerror=null;this.src='/Content/Avatar/upload/avatars/noavatar_medium.gif';" />
+</li>
+<li>
+@Html.LabelFor(m => m.NickName):
+@Model.NickName
+</li>
+<li>
+@Html.LabelFor(m => m.Gender):
+@ViewBag.GenderInfo
+</li>
+<li>
+@Html.LabelFor(m => m.Birth):
+@Model.Birth
+</li>
+<li>
+@Html.LabelFor(m => m.Location):
+@Model.Location
+</li>
+<li>
+@Html.LabelFor(m => m.Website):
+@Model.Website
+</li>
+<li>
+@Html.LabelFor(m => m.QQ):
+@Model.QQ
+</li>
+<li>
+@Html.LabelFor(m => m.Sina):
+@Model.Sina
+</li>
+<li>
+@Html.LabelFor(m => m.Facebook):
+@Model.Facebook
+</li>
+<li>
+@Html.LabelFor(m => m.Twitter):
+@Model.Twitter
+</li>
+<li>
+@Html.LabelFor(m => m.Phone):
+@Model.Phone
+</li>
+<li>
+@Html.LabelFor(m => m.Intro):
+<br/>
+@Html.Raw(Model.Intro)
+</li>
+<li>
+@Html.LabelFor(m => m.Signature):
+<br/>
+@Html.Raw(Model.Signature)
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $("#ucenter .tabbtn").click(function () {
+            var index = $("#ucenter .tabbtn").index($(this));
+            $(this).addClass("u_current").siblings("li").removeClass("u_current");
+            $($("#ucenter .tabitem").get(index)).show().siblings(".tabitem").hide();
+        });
+        RefreshAvatar();
+    });
+
+    //刷新头像
+    function RefreshAvatar() {
+        $('.uavatar').attr("src", '@(ViewBag.Localhost)/Content/Avatar/upload/avatars/@(ViewBag.uid)/large.jpg?random=1' + Math.random());
+    }
+</script>

@@ -1,0 +1,33 @@
+﻿@model Mvc3QA.Models.Accounts_Department
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Accounts_Department</legend>
+
+    <div class="display-label">DeptID</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DeptID)
+    </div>
+
+    <div class="display-label">DeptName</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DeptName)
+    </div>
+
+    <div class="display-label">ListOrder</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ListOrder)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

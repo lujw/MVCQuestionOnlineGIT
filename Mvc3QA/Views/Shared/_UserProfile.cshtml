@@ -1,0 +1,114 @@
+﻿@model Mvc3QA.Models.UserProfileModel
+@using res = Resource.Views.Shared.Shared;
+@{
+    string weblang = Resource.Models.Web.Web.Lang != "" ? Resource.Models.Web.Web.Lang : "zh-cn";
+    Mvc3QA.General.GeneralConfigInfo ci = ViewBag.CI as Mvc3QA.General.GeneralConfigInfo;
+}
+<div class="uitem">@(res.UserProfile)</div>
+<script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<div id="Loading">@Resource.Views.Home.Home.Ajax_Wait</div>
+<div id="AjaxResult">
+</div>
+@using (Ajax.BeginForm("AjaxUserProfile", new AjaxOptions { LoadingElementId = "profileloading", InsertionMode = InsertionMode.InsertBefore, OnSuccess = "UserProfileSubmitSuccess" }))
+{
+    <div id="commentform">
+        @Html.HiddenFor(m => m.Medals)
+        <div class="control-group">
+            <div class="control-label">
+                @Html.LabelFor(m => m.NickName)
+            </div>
+            <div class="controls">
+                @Html.TextBoxFor(m => m.NickName)
+                @Html.ValidationMessageFor(m => m.NickName)
+            </div>
+        </div>
+          <div class="control-group">
+            <div class="control-label">
+                @Html.LabelFor(m => m.Gender)
+            </div>
+            <div class="controls">
+                  @Html.DropDownList("Gender")
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="control-label">
+                @Html.LabelFor(m => m.Department)
+            </div>
+            <div class="controls">
+                  @Html.DropDownList("Department")
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="control-label">
+                @Html.LabelFor(m => m.Birth)
+            </div>
+            <div class="controls">
+                @Html.TextBoxFor(m => m.Birth, new { @id = "Birth" })
+                @Html.ValidationMessageFor(m => m.Birth)
+            </div>
+        </div>
+         <div class="control-group">
+            <div class="control-label">
+                @Html.LabelFor(m => m.Phone)
+            </div>
+            <div class="controls">
+                @Html.TextBoxFor(m => m.Phone)
+                @Html.ValidationMessageFor(m => m.Phone)
+            </div>
+        </div>
+
+       
+        <div @if (ci.IfSendReplyEmail == 2)
+             {@Html.Raw("style=\"display:none;\"")}>
+           <div class="control-group">
+            <div class="control-label">
+                @Html.LabelFor(m => m.Email)
+            </div>
+            <div class="controls">
+                @Html.TextBoxFor(m => m.Email)
+                @Html.ValidationMessageFor(m => m.Email)
+            </div>
+            </div>
+        </div>
+        <div class="control-group" @if (ci.IfSendReplyEmail == 2)
+                           {@Html.Raw("style=\"display:none;\"")}>
+            <div class="control-label">
+                @Html.LabelFor(m => m.IsSendEmail)
+            </div>
+            <div class="controls">
+              
+                <label for="IsSendEmail_y" class="radio">
+                    @res.Send
+                      <input type="radio" value="1" name="IsSendEmail" id="IsSendEmail_y"  @if (Model.IsSendEmail == "1")
+                                                                                     {@Html.Raw("checked=\"checked\"")}/>
+                    </label>
+              
+                <label for="IsSendEmail_n" class="radio">
+                    @res.Donotsend
+                      <input type="radio" value="2" name="IsSendEmail" id="IsSendEmail_n" @if (Model.IsSendEmail != "2")
+                                                                                    {@Html.Raw("checked=\"checked\"")}/>
+                    </label>
+            </div>
+        </div>
+       
+        <div style="width: 500px" class="editor_ubb">
+          
+        </div>
+       
+        <p>
+            <input type="submit" value="@Resource.Views.Home.Home.Submit" id="BtnSubmit" class="btn"/>
+            <span id="profileloading" style="display: none;">
+                <img src="/Content/images/loading/loader.gif" /></span>
+        </p>
+    </div>
+}
+<script type="text/javascript">
+    $(function () {
+        //        $("#Birth").daterangepicker();
+        $('#Birth').datepicker({
+            inline: true
+        });
+    });
+</script>

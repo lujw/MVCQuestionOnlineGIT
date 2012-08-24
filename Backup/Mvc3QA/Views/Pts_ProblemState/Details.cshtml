@@ -1,0 +1,80 @@
+﻿@model Mvc3QA.Models.Pts_ProblemState
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Pts_ProblemState</legend>
+
+    <div class="display-label">ProblemStateID</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ProblemStateID)
+    </div>
+
+    <div class="display-label">ProjectID</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ProjectID)
+    </div>
+
+    <div class="display-label">StateName</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.StateName)
+    </div>
+
+    <div class="display-label">Description</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Description)
+    </div>
+
+    <div class="display-label">ListOrder</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ListOrder)
+    </div>
+
+    <div class="display-label">IsFinalState</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IsFinalState)
+    </div>
+
+    <div class="display-label">AssignType</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AssignType)
+    </div>
+
+    <div class="display-label">Assignee</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Assignee)
+    </div>
+
+    <div class="display-label">SelectableAssigneeWorkgroupIDs</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SelectableAssigneeWorkgroupIDs)
+    </div>
+
+    <div class="display-label">SelectableAssigneeUserIDs</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SelectableAssigneeUserIDs)
+    </div>
+
+    <div class="display-label">OldID</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OldID)
+    </div>
+
+    <div class="display-label">ExtendedSettings</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ExtendedSettings)
+    </div>
+
+    <div class="display-label">AssignInfoExtendedSettings</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AssignInfoExtendedSettings)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

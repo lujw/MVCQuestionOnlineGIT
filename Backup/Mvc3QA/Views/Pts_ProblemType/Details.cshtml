@@ -1,0 +1,40 @@
+﻿@model Mvc3QA.Models.Pts_ProblemType
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Pts_ProblemType</legend>
+
+    <div class="display-label">ProblemTypeID</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ProblemTypeID)
+    </div>
+
+    <div class="display-label">ProjectID</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ProjectID)
+    </div>
+
+    <div class="display-label">TypeName</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.TypeName)
+    </div>
+
+    <div class="display-label">Description</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Description)
+    </div>
+
+    <div class="display-label">ListOrder</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ListOrder)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="YQBlogModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="YQBlogModelStoreContainer">
+    <EntitySet Name="blog_article" EntityType="YQBlogModel.Store.blog_article" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="blog_articledetail" EntityType="YQBlogModel.Store.blog_articledetail" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="blog_varticle" EntityType="YQBlogModel.Store.blog_varticle" store:Type="Views" store:Schema="dbo" store:Name="blog_varticle">
+      <DefiningQuery>SELECT 
+      [blog_varticle].[id] AS [id], 
+      [blog_varticle].[typeid] AS [typeid], 
+      [blog_varticle].[cateid] AS [cateid], 
+      [blog_varticle].[catepath] AS [catepath], 
+      [blog_varticle].[articleid] AS [articleid], 
+      [blog_varticle].[parentid] AS [parentid], 
+      [blog_varticle].[layer] AS [layer], 
+      [blog_varticle].[subcount] AS [subcount], 
+      [blog_varticle].[catename] AS [catename], 
+      [blog_varticle].[userid] AS [userid], 
+      [blog_varticle].[username] AS [username], 
+      [blog_varticle].[title] AS [title], 
+      [blog_varticle].[summary] AS [summary], 
+      [blog_varticle].[content] AS [content], 
+      [blog_varticle].[viewcount] AS [viewcount], 
+      [blog_varticle].[orderid] AS [orderid], 
+      [blog_varticle].[replypermit] AS [replypermit], 
+      [blog_varticle].[status] AS [status], 
+      [blog_varticle].[ip] AS [ip], 
+      [blog_varticle].[favor] AS [favor], 
+      [blog_varticle].[against] AS [against], 
+      [blog_varticle].[iscommend] AS [iscommend], 
+      [blog_varticle].[istop] AS [istop], 
+      [blog_varticle].[createdate] AS [createdate], 
+      [blog_varticle].[lastreplydate] AS [lastreplydate], 
+      [blog_varticle].[lastreplyuser] AS [lastreplyuser], 
+      [blog_varticle].[seotitle] AS [seotitle], 
+      [blog_varticle].[seodescription] AS [seodescription], 
+      [blog_varticle].[seokeywords] AS [seokeywords], 
+      [blog_varticle].[seometas] AS [seometas], 
+      [blog_varticle].[rename] AS [rename], 
+      [blog_varticle].[tags] AS [tags], 
+      [blog_varticle].[url] AS [url]
+      FROM [dbo].[blog_varticle] AS [blog_varticle]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+  <EntityType Name="blog_article">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="typeid" Type="int" Nullable="false" />
+    <Property Name="cateid" Type="int" Nullable="false" />
+    <Property Name="catepath" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="articleid" Type="int" Nullable="false" />
+    <Property Name="parentid" Type="int" Nullable="false" />
+    <Property Name="layer" Type="int" Nullable="false" />
+    <Property Name="subcount" Type="int" Nullable="false" />
+    <Property Name="catename" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="userid" Type="int" Nullable="false" />
+    <Property Name="username" Type="nchar" Nullable="false" MaxLength="20" />
+    <Property Name="title" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="summary" Type="nvarchar" Nullable="false" MaxLength="500" />
+    <Property Name="content" Type="ntext" Nullable="false" />
+    <Property Name="viewcount" Type="int" Nullable="false" />
+    <Property Name="orderid" Type="int" Nullable="false" />
+    <Property Name="replypermit" Type="tinyint" Nullable="false" />
+    <Property Name="status" Type="tinyint" Nullable="false" />
+    <Property Name="ip" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="favor" Type="int" Nullable="false" />
+    <Property Name="against" Type="int" Nullable="false" />
+    <Property Name="iscommend" Type="tinyint" Nullable="false" />
+    <Property Name="istop" Type="tinyint" Nullable="false" />
+    <Property Name="createdate" Type="datetime" Nullable="false" />
+    <Property Name="lastreplydate" Type="datetime" Nullable="false" />
+    <Property Name="lastreplyuser" Type="nchar" Nullable="false" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="blog_articledetail">
+    <Key>
+      <PropertyRef Name="articleid" />
+    </Key>
+    <Property Name="articleid" Type="int" Nullable="false" />
+    <Property Name="seotitle" Type="nvarchar" Nullable="false" MaxLength="500" />
+    <Property Name="seodescription" Type="nvarchar" Nullable="false" MaxLength="1000" />
+    <Property Name="seokeywords" Type="nvarchar" Nullable="false" MaxLength="500" />
+    <Property Name="seometas" Type="nvarchar" Nullable="false" MaxLength="1000" />
+    <Property Name="rename" Type="nvarchar" Nullable="false" MaxLength="60" />
+    <Property Name="tags" Type="nvarchar" Nullable="false" MaxLength="60" />
+  </EntityType>
+  <!--生成过程中发现错误:
+      警告 6002: 表/视图“YqYQBlog.dbo.YQBlog_articledetail”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
+      -->
+  <!--生成过程中发现错误:
+      警告 6002: 表/视图“YqYQBlog.dbo.blog_varticle”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
+      -->
+  <EntityType Name="blog_varticle">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="typeid" Type="int" Nullable="false" />
+    <Property Name="cateid" Type="int" Nullable="false" />
+    <Property Name="catepath" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="articleid" Type="int" Nullable="false" />
+    <Property Name="parentid" Type="int" Nullable="false" />
+    <Property Name="layer" Type="int" Nullable="false" />
+    <Property Name="subcount" Type="int" Nullable="false" />
+    <Property Name="catename" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="userid" Type="int" Nullable="false" />
+    <Property Name="username" Type="nchar" Nullable="false" MaxLength="20" />
+    <Property Name="title" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="summary" Type="nvarchar" Nullable="false" MaxLength="500" />
+    <Property Name="content" Type="ntext" Nullable="false" />
+    <Property Name="viewcount" Type="int" Nullable="false" />
+    <Property Name="orderid" Type="int" Nullable="false" />
+    <Property Name="replypermit" Type="tinyint" Nullable="false" />
+    <Property Name="status" Type="tinyint" Nullable="false" />
+    <Property Name="ip" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="favor" Type="int" Nullable="false" />
+    <Property Name="against" Type="int" Nullable="false" />
+    <Property Name="iscommend" Type="tinyint" Nullable="false" />
+    <Property Name="istop" Type="tinyint" Nullable="false" />
+    <Property Name="createdate" Type="datetime" Nullable="false" />
+    <Property Name="lastreplydate" Type="datetime" Nullable="false" />
+    <Property Name="lastreplyuser" Type="nchar" Nullable="false" MaxLength="20" />
+    <Property Name="seotitle" Type="nvarchar" Nullable="false" MaxLength="500" />
+    <Property Name="seodescription" Type="nvarchar" Nullable="false" MaxLength="1000" />
+    <Property Name="seokeywords" Type="nvarchar" Nullable="false" MaxLength="500" />
+    <Property Name="seometas" Type="nvarchar" Nullable="false" MaxLength="1000" />
+    <Property Name="rename" Type="nvarchar" Nullable="false" MaxLength="60" />
+    <Property Name="tags" Type="nvarchar" Nullable="false" MaxLength="60" />
+    <Property Name="url" Type="nvarchar" MaxLength="68" />
+  </EntityType>
+  <!--生成过程中发现错误:
+      警告 6002: 表/视图“YqYQBlog.dbo.YQBlog_varticle”未定义主键。已推断出该键，并将定义创建为只读的表/视图。
+      -->
+  <Function Name="blog_createarticle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="typeid" Type="int" Mode="In" />
+    <Parameter Name="cateid" Type="int" Mode="In" />
+    <Parameter Name="catepath" Type="nvarchar" Mode="In" />
+    <Parameter Name="articleid" Type="int" Mode="In" />
+    <Parameter Name="parentid" Type="int" Mode="In" />
+    <Parameter Name="layer" Type="int" Mode="In" />
+    <Parameter Name="catename" Type="nvarchar" Mode="In" />
+    <Parameter Name="userid" Type="int" Mode="In" />
+    <Parameter Name="username" Type="nchar" Mode="In" />
+    <Parameter Name="title" Type="nvarchar" Mode="In" />
+    <Parameter Name="summary" Type="nvarchar" Mode="In" />
+    <Parameter Name="content" Type="ntext" Mode="In" />
+    <Parameter Name="replypermit" Type="tinyint" Mode="In" />
+    <Parameter Name="status" Type="tinyint" Mode="In" />
+    <Parameter Name="ip" Type="nvarchar" Mode="In" />
+    <Parameter Name="seotitle" Type="nvarchar" Mode="In" />
+    <Parameter Name="seodescription" Type="nvarchar" Mode="In" />
+    <Parameter Name="seokeywords" Type="nvarchar" Mode="In" />
+    <Parameter Name="seometas" Type="nvarchar" Mode="In" />
+    <Parameter Name="rename" Type="nvarchar" Mode="In" />
+    <Parameter Name="tags" Type="nvarchar" Mode="In" />
+    <Parameter Name="iscommend" Type="tinyint" Mode="In" />
+    <Parameter Name="istop" Type="tinyint" Mode="In" />
+  </Function>
+  <Function Name="blog_deletearticle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="aid" Type="int" Mode="In" />
+    <Parameter Name="parentid" Type="int" Mode="In" />
+  </Function>
+  <Function Name="blog_updatearticle" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="aid" Type="int" Mode="In" />
+    <Parameter Name="typeid" Type="int" Mode="In" />
+    <Parameter Name="cateid" Type="int" Mode="In" />
+    <Parameter Name="catename" Type="nvarchar" Mode="In" />
+    <Parameter Name="catepath" Type="nvarchar" Mode="In" />
+    <Parameter Name="parentid" Type="int" Mode="In" />
+    <Parameter Name="title" Type="nvarchar" Mode="In" />
+    <Parameter Name="summary" Type="nvarchar" Mode="In" />
+    <Parameter Name="content" Type="ntext" Mode="In" />
+    <Parameter Name="replypermit" Type="tinyint" Mode="In" />
+    <Parameter Name="status" Type="tinyint" Mode="In" />
+    <Parameter Name="seotitle" Type="nvarchar" Mode="In" />
+    <Parameter Name="seodescription" Type="nvarchar" Mode="In" />
+    <Parameter Name="seokeywords" Type="nvarchar" Mode="In" />
+    <Parameter Name="seometas" Type="nvarchar" Mode="In" />
+    <Parameter Name="rename" Type="nvarchar" Mode="In" />
+    <Parameter Name="tags" Type="nvarchar" Mode="In" />
+    <Parameter Name="iscommend" Type="tinyint" Mode="In" />
+    <Parameter Name="istop" Type="tinyint" Mode="In" />
+  </Function>
+</Schema>

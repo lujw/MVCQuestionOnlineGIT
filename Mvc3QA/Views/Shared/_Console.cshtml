@@ -1,0 +1,12 @@
+﻿<div class="subnav" style="margin-bottom: 20px;">
+    <ul class="nav nav-pills" id="sort">
+        <li><a href="#labels" title="Total">问题总数<span class="badge badge-info" style="margin-left: 5px;">@ViewBag.QuestionCount</span></a></li>
+        <li><a href="#labels" title="NewQuestion">新提交问题<span class="badge badge-info" style="margin-left: 5px;">@ViewBag.NewQuestion</span></a></li>
+        <li><a href="#badges" title="MyReplay">我的待处理问题<span class="badge badge-warning" style="margin-left: 5px;">@ViewBag.MyReplayCount</span></a></li>
+        <li><a href="#thumbnails" title="MySolvedQuestion">我的已解决问题<span class="badge badge-success"
+            style="margin-left: 5px;">@ViewBag.MySolvedQuestionCount</span></a></li>
+        <li><a href="#thumbnails" title="SolvedQuestion">已解决问题<span class="badge badge-success"
+            style="margin-left: 5px;">@ViewBag.SolvedQuestionCount</span></a></li>
+        <li>@Html.ActionLink("返回问题列表", "Index", "Problems")</li>
+    </ul>
+</div>

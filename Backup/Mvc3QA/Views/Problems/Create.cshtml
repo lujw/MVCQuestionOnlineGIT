@@ -1,0 +1,192 @@
+﻿@model Mvc3QA.Models.Pts_Problems
+@using res = Resource.Views.Admin.Admin;
+@{Mvc3QA.General.GeneralConfigInfo ci = ViewBag.CI as Mvc3QA.General.GeneralConfigInfo;}
+@{
+    ViewBag.Title = "提交问题";
+}
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/kindeditor/kindeditor.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/kindeditor/lang/zh_CN.js")" type="text/javascript"></script>
+@Html.Partial("_Console")
+<div class="row-fluid">     
+    <div class="span12">
+        @using (Html.BeginForm("Create", "Problems", FormMethod.Post, new { @class = "form-horizontal" }))
+        {         
+              <fieldset>
+                        <legend>提交问题</legend>
+            <div class="control-group">
+                <div class="control-label">
+                    @Html.LabelFor(model => model.Title)
+                </div>
+                <div class="controls">
+                    @Html.EditorFor(model => model.Title)
+                    @Html.ValidationMessageFor(model => model.Title)
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="control-label">
+                    @Html.LabelFor(model => model.CategoryID)
+                </div>
+                <div class="controls">
+                    @Html.DropDownList("CategoryID")
+                </div>
+            </div>
+            @if (@ViewBag.showAssignTo != "6b0500be-2b97-4dc3-8e22-7d34fa9d0acf")
+            {
+                <div class="control-group">
+                <div class="control-label">
+                    @Html.LabelFor(model => model.AssignedTo)
+                </div>
+                <div class="controls">
+                    @Html.DropDownList("AssignedTo")<select id="AssignedToUser" name="AssignedToUser"></select>
+                </div>
+            </div> 
+            }
+           
+            <div class="control-group">
+                <div class="control-label">
+                    @Html.LabelFor(model => model.StartTime)
+                </div>
+                <div class="controls">
+                    @Html.EditorFor(model => model.StartTime)
+                    @Html.ValidationMessageFor(model => model.StartTime)
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="control-label">
+                    @Html.LabelFor(model => model.CloseTime)
+                </div>
+                <div class="controls">
+                    @Html.EditorFor(model => model.CloseTime)
+                    @Html.ValidationMessageFor(model => model.CloseTime)
+                </div>
+            </div>               
+            <div class="control-group">
+                <div class="control-label">
+                    @Html.LabelFor(model => model.Content)
+                </div>
+                <div class="controls">
+                    @Html.TextAreaFor(model => model.Content, new { style = "width: 600px; height: 300px" })
+                    @Html.ValidationMessageFor(model => model.Content)
+                </div>
+            </div>          
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary" id="BtnSubmit" name="BtnSubmit">
+                    保存</button>
+                <span style="display: none;" id="Loading">提交中...</span>
+                <button class="btn">
+                    取消</button>
+            </div>
+             </fieldset>       
+        }
+    </div>
+</div>
+@section JS{
+    <script type="text/javascript">
+        var currentitem = "@ViewBag.CurrentItem";
+        $(function () {
+        //默认加载
+          var Did2 = $("#AssignedTo").val();
+               $("#AssignedToUser").find("option").remove();  //清空                              
+                $.post("@Url.Content("~/Problems/GetDeptUser/")", { id: Did2 }, function (data) {
+                    if (data == "-1") {
+                        alert("删除失败");
+                    }
+                    else {$.each(data,function(index,item){  $("<option></option>").val(item["Value"]).text(item["Text"]).appendTo($("#AssignedToUser")); })                   
+                   
+                    }
+
+                });
+                //改变加载
+         $("[name='AssignedTo']").change(
+        function () {
+         
+                var Did = $(this).attr("value");
+               $("#AssignedToUser").find("option").remove();  //清空                              
+                $.post("@Url.Content("~/Problems/GetDeptUser/")", { id: Did }, function (data) {
+                    if (data == "-1") {
+                        alert("删除失败");
+                    }
+                    else {$.each(data,function(index,item){  $("<option></option>").val(item["Value"]).text(item["Text"]).appendTo($("#AssignedToUser")); })                   
+                   
+                    }
+
+                });
+           
+        }
+       )
+
+            $('#StartTime, #CloseTime').daterangepicker(); 
+            $("#" + currentitem).addClass("selected");
+            /*
+            //添加一个编辑器
+            var editor;
+            KindEditor.ready(function (K) {
+            editor = K.create('textarea[name="Content"]', {
+            allowFileManager: true
+            });
+            });
+
+
+            //添加多个编辑器,方法1，遍历一次性添加
+            var $textareas = $(".clstxtarea textarea");
+            KindEditor.ready(function (K) {
+            $.each($textareas, function () {
+            //alert($(this).attr("id"));
+            K.create(this);
+            });
+            });
+
+   
+            【参数说明】参数1，绑定的textarea对象，参数2，json对象，编辑器属性设置。常用如下：
+            详细可参考：http://www.kindsoft.net/docs/option.html
+            cssPath : '/css/index.css',//可用其它CSS选择器
+            resizeType: 0, 
+            allowImageUpload: true, 
+            uploadJson: 'kindeditor-4.0.5/asp.net/upload_json.ashx',
+            fileManagerJson: '/Controller/Action/', 
+            allowFileManager: true,
+            width: "100%", //编辑器的宽度为100%
+            height: "250px", //编辑器的高度为100px
+            filterMode: false, //不会过滤HTML代码
+            resizeMode: 1 //编辑器只能调整高度
+            精简模式 例如： 
+            items: [ 
+            'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline', 
+            'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist', 
+            'insertunorderedlist', '|', 'emoticons', 'image', 'link'] 
+
+            */
+            //添加多个编辑器，方法2，逐个添加，可以分别作差异化的设置          
+            var editorContent = null;
+
+            KindEditor.ready(function (K) {        
+                     editorContent = K.create('textarea[name="Content"]', {
+                    allowImageUpload: true,
+                    uploadJson: '/admin/UploadFile'
+                    //                ,items: [
+                    //'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+                    //'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+                    //'insertunorderedlist', '|', 'emoticons', 'image', 'flash', 'media', 'insertfile', 'table', 'link']
+                });
+            });
+
+//            $(document).keyup(function () {
+//                    alert($('#Content').val());
+//                });
+
+//                    function SummaryTxtKeyUp() {
+//                        editorSummary.sync();
+//                        var summarytxt = $('#Description').val();
+//                        $("#SummaryTxtCount").html('(' + (300 - summarytxt.length) + ')');
+//                    }
+
+            $("#BtnSubmit").click(function () {                        
+                editorContent.html(ReplaceKESpace(editorContent.html()));
+                editorContent.sync();
+            });
+
+        });
+    </script>
+}

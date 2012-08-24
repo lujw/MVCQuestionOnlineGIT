@@ -1,0 +1,43 @@
+﻿@model Mvc3QA.Models.Pts_ProblemType
+
+@{
+    ViewBag.Title = "Create";
+}
+
+
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>类别管理</legend>
+        <div class="control-group">
+         <div class="control-label">   
+            @Html.LabelFor(model => model.TypeName)
+        </div>
+          <div class="controls">
+            @Html.EditorFor(model => model.TypeName)
+            @Html.ValidationMessageFor(model => model.TypeName)
+        </div>
+        </div>
+         <div class="control-group">
+         <div class="control-label">   
+            @Html.LabelFor(model => model.Description)
+        </div>
+        <div class="controls">
+            @Html.EditorFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+        </div>
+       
+        <p>
+            <input type="submit" value="添加" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("返回信息列表", "Index")
+</div>

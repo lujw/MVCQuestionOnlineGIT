@@ -1,0 +1,45 @@
+﻿@using res = Resource.Views.Shared.Shared;
+@model IEnumerable<YQBlog.Models.blog_article>
+<h2>@(res.CommentsList)</h2>  
+<div class="commentpager ajaxpager">@Html.Raw(ViewBag.AjaxPager)</div>
+<div class="commentlist" id="comments"> 
+<ul>
+    @if ((Model as IEnumerable<YQBlog.Models.blog_article>).Count() > 0)
+    {  
+        foreach (var item in Model)
+        {
+        <li id="@item.id" name="@item.id" u="@item.username.Trim()" class="clearfix">
+            <p>
+            <a href="#@item.id" class="replylayer">#@(item.orderid)@Resource.Views.Home.Home.Floor</a>
+            <span class="replayuser">
+            @if (item.userid == 1)
+            {
+                <a href="@(res.UrlPath)/u/@System.Web.HttpUtility.UrlEncode(item.username.Trim(), System.Text.Encoding.UTF8)">@item.username.Trim()</a>
+            }
+            else
+            {
+                @item.username.Trim()
+            }
+            </span>
+            @(item.createdate)
+            </p>
+            <div class="replyavatar">
+                <img onerror="this.onerror=null;this.src='/Content/image/defaultPhoto.png';" src="/Content/Avatar/upload/avatars/@(item.username.Trim())/small.jpg"/>
+            </div>
+            <div class="replycontent">@Html.Raw(item.content)</div>
+
+            <div class="replyoperate">
+            @if (item.userid == 1 && item.username.Trim() == User.Identity.Name)
+            {
+                <a href="###" class="reply-update">@res.Modify</a> 
+                <a href="###" class="reply-del">@res.Delete</a>
+            }
+            <a href="###" class="reply-quote">@Resource.Views.Home.Home.Quote</a> 
+            <a href="###" class="reply-re">@Resource.Views.Home.Home.Reply</a>
+            </div>
+        </li>
+        }
+    }
+</ul>
+</div>
+<div class="commentpager ajaxpager">@Html.Raw(ViewBag.AjaxPager)</div>

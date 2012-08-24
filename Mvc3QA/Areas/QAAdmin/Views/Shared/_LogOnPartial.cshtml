@@ -1,0 +1,38 @@
+﻿@if (Request.IsAuthenticated)
+{
+    <li><a href="#">提交问题</a></li>
+    <li class="divider-vertical"></li>
+     <li><a href="#">处理问题</a></li>
+    <li class="divider-vertical"></li>
+    <li>
+               @Html.ActionLink("后台管理", "Index", "Admin")
+            </li>
+     <li class="divider-vertical"></li>
+    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        @User.Identity.Name <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+            <li>
+                @Html.ActionLink("修改密码", "ChangePassword", "../Account")
+            </li>
+             <li class="divider"></li>
+            <li>@Html.ActionLink("详细信息", "UCenter", "../Account")</li>
+            <li class="divider"></li>
+            <li>
+                @Html.ActionLink("注销", "LogOff", "../Account")
+            </li>
+           
+        </ul>
+    </li>
+}
+else
+{   
+    <li class="divider-vertical"></li>
+    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">游客 <b
+        class="caret"></b></a>
+        <ul class="dropdown-menu">
+            <li>@Html.ActionLink("登录", "LogOn", "Account")</li>
+            <li class="divider"></li>
+            <li>@Html.ActionLink("注册", "Register", "Account")</li>
+        </ul>
+    </li>
+}

@@ -1,0 +1,21 @@
+﻿@using res = Resource.Views.Account.Account;
+@model IEnumerable<YQBlog.Models.blog_article>
+<div class="uitem">@(res.MyMessages)</div>
+<div class="mynote ajaxpager">@Html.Raw(ViewBag.AjaxPager)</div>
+<div class="commentlist ucomment" id="comments"> 
+<ul>
+    @if ((Model as IEnumerable<YQBlog.Models.blog_article>).Count() > 0)
+    {  
+        foreach (var item in Model)
+        {
+        <li id="@item.id">
+        <div>@Html.Raw(item.content)</div>
+            <p class="txtright">
+            -- @(item.createdate)
+            </p>
+        </li>
+        }
+    }
+</ul>
+</div>
+<div class="mynote ajaxpager">@Html.Raw(ViewBag.AjaxPager)</div>

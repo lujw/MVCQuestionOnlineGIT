@@ -1,0 +1,30 @@
+﻿@model Mvc3QA.Models.Accounts_Department
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Accounts_Department</legend>
+
+    <div class="display-label">DeptID</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DeptID)
+    </div>
+
+    <div class="display-label">DeptName</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DeptName)
+    </div>
+
+    <div class="display-label">ListOrder</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ListOrder)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

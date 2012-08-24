@@ -1,0 +1,36 @@
+﻿@using res = Resource.Views.Shared.Shared; 
+@*<div class="dropmenu">
+<a class="dropmenu-title" href="###">@(string.IsNullOrEmpty(Request.Cookies["web"]["theme"]) ? "Default" : Request.Cookies["web"]["theme"].ToString())<b></b></a>
+<div class="dropmenu-list"> 
+
+@Html.ActionLink("Default", "ChangeTheme", "Themes",
+    new { theme = "" }, null)
+   
+@Html.ActionLink("Theme02", "ChangeTheme", "Themes",
+        new { theme = "Theme02" }, null)
+  
+</div>
+</div>*@
+
+<div class="dropmenu">
+<a class="dropmenu-title" href="###">@res.LangName<b></b></a>
+<div class="dropmenu-list"> 
+
+@Html.ActionLink("English", "ChangeLanguage", "Lang",
+new { language = "en-us" }, null)
+   
+@Html.ActionLink("中[简体]", "ChangeLanguage", "Lang",
+        new { language = "zh-cn" }, null)
+  
+@Html.ActionLink("中[繁体]", "ChangeLanguage", "Lang",
+        new { language = "zh-tw" }, null)
+
+</div>
+</div>
+
+@if(Request.IsAuthenticated) {
+    <p>Hello, @Html.ActionLink(User.Identity.Name, "UCenter", "Account") | @Html.ActionLink(res.Management, "Manage", "Account") | @Html.ActionLink(res.ChangePassword, "ChangePassword", "Account") | @Html.ActionLink(res.Logout, "LogOff", "Account")</p>
+}
+else {
+    <p>[ @Html.ActionLink(res.SignIn, "LogOn", "Account") ]</p>
+}

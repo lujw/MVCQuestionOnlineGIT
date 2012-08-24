@@ -1,0 +1,16 @@
+E:\Code\Mvc3QA\Mvc3QA\Mvc3QA\bin\Mvc3QA.dll
+E:\Code\Mvc3QA\Mvc3QA\Mvc3QA\bin\Mvc3QA.pdb
+E:\Code\Mvc3QA\Mvc3QA\Mvc3QA\bin\Common.dll
+E:\Code\Mvc3QA\Mvc3QA\Mvc3QA\bin\EntityFramework.dll
+E:\Code\Mvc3QA\Mvc3QA\Mvc3QA\bin\Microsoft.Web.Infrastructure.dll
+E:\Code\Mvc3QA\Mvc3QA\Mvc3QA\bin\Resource.dll
+E:\Code\Mvc3QA\Mvc3QA\Mvc3QA\bin\WebActivator.dll
+E:\Code\Mvc3QA\Mvc3QA\Mvc3QA\bin\HtmlAgilityPack.dll
+E:\Code\Mvc3QA\Mvc3QA\Mvc3QA\bin\Common.pdb
+E:\Code\Mvc3QA\Mvc3QA\Mvc3QA\bin\Resource.pdb
+E:\Code\Mvc3QA\Mvc3QA\Mvc3QA\bin\EntityFramework.xml
+E:\Code\Mvc3QA\Mvc3QA\Mvc3QA\bin\en-us\Resource.resources.dll
+E:\Code\Mvc3QA\Mvc3QA\Mvc3QA\bin\zh-tw\Resource.resources.dll
+E:\Code\Mvc3QA\Mvc3QA\Mvc3QA\obj\Debug\ResolveAssemblyReference.cache
+E:\Code\Mvc3QA\Mvc3QA\Mvc3QA\obj\Debug\Mvc3QA.dll
+E:\Code\Mvc3QA\Mvc3QA\Mvc3QA\obj\Debug\Mvc3QA.pdb

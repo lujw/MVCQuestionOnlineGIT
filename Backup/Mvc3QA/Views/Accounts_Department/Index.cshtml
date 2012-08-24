@@ -1,0 +1,118 @@
+﻿@model IEnumerable<Mvc3QA.Models.Accounts_Department>
+@{
+    ViewBag.Title = "部门管理";
+}
+<p>
+    @Html.ActionLink("添加新部门", "Create", null, new { @class = "btn" })
+</p>
+<table id="myDataTable" class="display">
+    <thead>
+        <tr>
+            <th>
+                标识
+            </th>
+            <th>
+                公司名称
+            </th>
+            <th>
+                地址
+            </th>
+           
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+<input type="button" id="btnTest" value="根据条件重新响应后台Ajax" />
+@*<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                部门名称
+            </th>
+            <th>
+                排序
+            </th>
+            <th>
+                操作
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeptName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ListOrder)
+                </td>
+                <td>
+                    @Html.ActionLink("修改", "Edit", new { id = item.DeptID }) |
+                    @Html.ActionLink("详细信息", "Details", new { id = item.DeptID }) | <a id="@item.DeptID" name="Delete">
+                        删除</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>*@
+@section JS{
+    <script type="text/javascript">
+ var tbl;
+        $(function () {
+       
+            tbl = $('#myDataTable').dataTable({
+                "bServerSide": true,
+                "sAjaxSource": "@Url.Content("~/Accounts_Department/AjaxHandler/")",      //mvc后台ajax调用接口。
+                'bPaginate': true,                      //是否分页。
+                "bProcessing": true,                    //当datatable获取数据时候是否显示正在处理提示信息。
+                'bFilter': true,                       //是否使用内置的过滤功能。
+                'bLengthChange': true,                  //是否允许用户自定义每页显示条数。
+                'sPaginationType': 'full_numbers',      //分页样式
+                "aoColumns": [
+                        { "sName": "ID",
+                            "bSearchable": false,
+                            "bSortable": false,
+                            "fnRender": function (oObj) {
+                                return '<a href=\"Details/' + oObj.aData[0] + '\">View</a>';
+                            }                           //自定义列的样式
+                        },
+                        { "sName": "COMPANY_NAME" },
+                        { "sName": "ADDRESS" }
+                       
+                    ]
+            });
+
+            //Ajax重新load控件数据。（server端）
+            $("#btnTest").click(function () {
+                var oSettings = tbl.fnSettings();
+                oSettings.sAjaxSource = "Home/AjaxHandler2";
+                alert(oSettings.sAjaxSource);
+                tbl.fnClearTable(0);
+                tbl.fnDraw();
+
+            });
+        });
+    $(function () {
+        $("[name='Delete']").click(
+        function () {
+            if (confirm("确定要删除这条记录么？")) {
+                var Did = $(this).attr("id");
+                var tr = $(this).parent().parent();                   
+                $.post("@Url.Content("~/Accounts_Department/Delete/")", { id: Did }, function (data) {
+                    if (data == "-1") {
+                        alert("删除失败");
+                    }
+                    else {
+                        $(tr).remove();
+                        alert("删除成功");
+                    }
+
+                });
+            }
+        }
+        );
+    });
+    </script>
+}

@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="YQBlogModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="YQBlogEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="blog_article" EntityType="YQBlogModel.blog_article" />
+    <EntitySet Name="blog_articledetail" EntityType="YQBlogModel.blog_articledetail" />
+    <EntitySet Name="blog_varticle" EntityType="YQBlogModel.blog_varticle" />
+    <FunctionImport Name="fun_articledel" ReturnType="Collection(Int32)">
+      <Parameter Name="aid" Mode="In" Type="Int32" />
+      <Parameter Name="parentid" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+  <EntityType Name="blog_article">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="typeid" Nullable="false" />
+    <Property Type="Int32" Name="cateid" Nullable="false" />
+    <Property Type="String" Name="catepath" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="articleid" Nullable="false" />
+    <Property Type="Int32" Name="parentid" Nullable="false" />
+    <Property Type="Int32" Name="layer" Nullable="false" />
+    <Property Type="Int32" Name="subcount" Nullable="false" />
+    <Property Type="String" Name="catename" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="userid" Nullable="false" />
+    <Property Type="String" Name="username" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Type="String" Name="title" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="summary" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="content" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="viewcount" Nullable="false" />
+    <Property Type="Int32" Name="orderid" Nullable="false" />
+    <Property Type="Byte" Name="replypermit" Nullable="false" />
+    <Property Type="Byte" Name="status" Nullable="false" />
+    <Property Type="String" Name="ip" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="favor" Nullable="false" />
+    <Property Type="Int32" Name="against" Nullable="false" />
+    <Property Type="Byte" Name="iscommend" Nullable="false" />
+    <Property Type="Byte" Name="istop" Nullable="false" />
+    <Property Type="DateTime" Name="createdate" Nullable="false" />
+    <Property Type="DateTime" Name="lastreplydate" Nullable="false" />
+    <Property Type="String" Name="lastreplyuser" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="blog_articledetail">
+    <Key>
+      <PropertyRef Name="articleid" />
+    </Key>
+    <Property Type="Int32" Name="articleid" Nullable="false" />
+    <Property Type="String" Name="seotitle" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="seodescription" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="seokeywords" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="seometas" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="rename" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="tags" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="blog_varticle">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Type="Int32" Name="id" Nullable="false" />
+    <Property Type="Int32" Name="typeid" Nullable="false" />
+    <Property Type="Int32" Name="cateid" Nullable="false" />
+    <Property Type="String" Name="catepath" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="articleid" Nullable="false" />
+    <Property Type="Int32" Name="parentid" Nullable="false" />
+    <Property Type="Int32" Name="layer" Nullable="false" />
+    <Property Type="Int32" Name="subcount" Nullable="false" />
+    <Property Type="String" Name="catename" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="userid" Nullable="false" />
+    <Property Type="String" Name="username" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Type="String" Name="title" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="summary" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="content" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="viewcount" Nullable="false" />
+    <Property Type="Int32" Name="orderid" Nullable="false" />
+    <Property Type="Byte" Name="replypermit" Nullable="false" />
+    <Property Type="Byte" Name="status" Nullable="false" />
+    <Property Type="String" Name="ip" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="favor" Nullable="false" />
+    <Property Type="Int32" Name="against" Nullable="false" />
+    <Property Type="Byte" Name="iscommend" Nullable="false" />
+    <Property Type="Byte" Name="istop" Nullable="false" />
+    <Property Type="DateTime" Name="createdate" Nullable="false" />
+    <Property Type="DateTime" Name="lastreplydate" Nullable="false" />
+    <Property Type="String" Name="lastreplyuser" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Type="String" Name="seotitle" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="seodescription" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="seokeywords" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="seometas" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="rename" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="tags" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="url" MaxLength="68" FixedLength="false" Unicode="true" />
+  </EntityType>
+</Schema>

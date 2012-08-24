@@ -1,0 +1,163 @@
+﻿@model IEnumerable<YQBlog.Models.ArtilceWithDecorate> 
+@using res = Resource.Views.Home.Home;
+@{
+    YQBlog.General.GeneralConfigInfo ci = ViewBag.CI as YQBlog.General.GeneralConfigInfo;
+    ViewBag.Title = "YQBlog - 基于.net mvc3的个人博客程序,支持多国语言，模板切换";
+  }
+@section Css{
+    <link href="@Url.Content("~/Content/themes/base/jquery.ui.all.css")" rel="stylesheet" type="text/css" />
+}
+<div class="page_wrap">
+    <div id="page">
+        <div class="page_inner">
+    @if ((Model as IEnumerable<YQBlog.Models.blog_varticle>).Count() > 0)
+    {
+        foreach (var item in Model)
+        {
+            <div class="post bottom_border" id="post-@(item.id)">
+                <div class="preview">
+                    <div class="post_taxonomy">
+                        @Html.Raw(item.catepath)              
+                    </div>
+                    <h1 class="post_title">
+                        <a title="@item.title" href="@res.UrlPath@item.url">@item.title</a>
+                    </h1>
+                    <div class="post_meta">
+                    <span class="post_meta_words">
+                      @item.createdate
+                      @if (item.subcount > 0)
+                      {   
+                        <a title="Comment" href="@res.UrlPath@(item.url)#comment"> @item.subcount @res.Comments</a> 
+                      }
+                      </span>             
+                    </div> 
+                <div class="text">
+                    <div class="textcontent">
+                        @Html.Raw(item.summary)
+                    </div>
+                    <p class="more-link-wrap">(<a class="more-link" href="@res.UrlPath@item.url">@res.Continue</a>)</p> 
+                </div>
+                </div>           
+             </div>
+        }
+    }  
+            <div class="pager">
+            </div>
+
+        </div>
+    </div>
+            
+</div>
+<div id="sidebar">
+
+    <div class="topic">
+        <a href="/commentrss/" target="_blank" class="commentrss">@res.Comment</a>  
+        <a href="/rss/" target="_blank" class="rss">@res.Rss</a> 
+    </div>
+
+    <div class="datepicker">
+        <div id="datepicker"></div>
+    </div>
+
+    <div class="sidebar_sub">
+    <h3>@res.Archive</h3>
+    <ul>
+    @foreach (var item in ViewBag.ArticleArchives as IEnumerable<YQBlog.Models.ArticleArchives>)
+    {
+        string datestr = item.Year + res.Year + item.Month + res.Month;
+        if (Resource.Models.Web.Web.Lang == "en-us")
+        {
+            System.Globalization.DateTimeFormatInfo myDTFI = new System.Globalization.CultureInfo(Resource.Models.Web.Web.Lang, false).DateTimeFormat;
+            datestr = myDTFI.GetAbbreviatedMonthName(item.Month) + " " + item.Year;
+        }
+        
+    <li><a href="@res.UrlPath/Archives/@(item.Year)/@(item.Month)/">@datestr (@item.Count)</a></li>
+    }
+    </ul>   
+    </div>
+
+    <div class="sidebar_sub">
+    <h3>@res.ViewTop</h3>
+    <ul>
+    @foreach (var item in ViewBag.MostViewArticles as IEnumerable<YQBlog.Models.blog_varticle>)
+    {
+    <li><a title="@item.title" href="@res.UrlPath@item.url">@(item.title)(@item.viewcount)</a></li>
+    }
+    </ul>   
+    </div>
+
+    <div class="sidebar_sub">
+    <h3>@res.CommentTop</h3>
+    <ul>
+    @foreach (var item in ViewBag.MostReplyArticles as IEnumerable<YQBlog.Models.blog_varticle>)
+    {
+    <li><a title="@item.title" href="@res.UrlPath@item.url">@(item.title)(@item.subcount)</a></li>
+    }
+    </ul>   
+    </div>
+
+    <div class="sidebar_sub">
+    <h3>@res.NewComments</h3>
+    <ul>
+    @foreach (var item in ViewBag.NewArticleReplies as IEnumerable<YQBlog.Models.blog_varticle>)
+    {
+    <li><a title="@item.title" href="@res.UrlPath@(item.url)#@item.id">re:@item.title</a><br/>@Html.Raw(item.content)<br/><p class="txtright">-- @item.username</p></li>
+    }
+    </ul>   
+    </div>
+
+    <div class="sidebar_sub">
+    <h3>@res.Tag</h3>
+    <div class="sidebar_text tags">
+    @foreach (var item in ViewBag.Tags as IEnumerable<YQBlog.Models.TagInfo>)
+    {
+        <a href="@res.UrlPath/Tag/@System.Web.HttpUtility.UrlEncode(item.Tag.Replace(".", "@"), System.Text.Encoding.UTF8).Replace("+", "%20")">@(item.Tag)(@item.Count)</a>
+    }
+    </div>   
+    </div> 
+
+
+    <div class="sidebar_sub">
+        <h3>@res.Statistics</h3>
+        <div class="sidebar_text">
+               @res.Articles: @ViewBag.ArticleCount
+                <br/>
+               @res.Albums: @ViewBag.AlbumCount
+                <br/>
+               @res.Messages: @ViewBag.NoteCount
+                <br/>
+               @res.ArticleComments: @ViewBag.ArticleReplyCount
+                <br/>
+               @res.AlbumComments: @ViewBag.AlbumReplyCount
+        </div>   
+    </div>
+
+</div>
+@section Js{
+    <script src="@Url.Content("~/Scripts/jquery.pager.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery-ui-1.8.11.min.js")" type="text/javascript"></script>
+    @if (Resource.Models.Web.Web.Lang == "" || Resource.Models.Web.Web.Lang == "zh-tw")
+    { 
+        <script src="@Url.Content("~/Scripts/jquery.ui.datepicker-zh-CN.js")" type="text/javascript"></script>
+    }
+    <script type="text/javascript">
+        @Html.Raw(ViewBag.ArticleDates)
+        var pageNo = @ViewBag.PageNo;
+        var pageCount = @ViewBag.PageCount;
+        $(function () {
+            if (pageCount == 0) { $(".pager").hide() }
+            $(".pager").pager({ pagenumber: pageNo, pagecount: pageCount, buttonClickCallback: PageClick });
+
+            $("#datepicker").datepicker({
+              onChangeMonthYear: function (year, month, inst) {
+                  setTimeout("initArticleCalendar()", 0);
+              }
+          });
+          initArticleCalendar();
+
+        });
+        PageClick = function (no) {
+            window.location = "/"+no;
+        }
+    </script>
+}

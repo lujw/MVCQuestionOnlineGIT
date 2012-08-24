@@ -1,0 +1,17 @@
+E:\Code\Mvc3QA\Mvc3QA\Mvc3QA.Tests\bin\Debug\Mvc3QA.Tests.dll.config
+E:\Code\Mvc3QA\Mvc3QA\Mvc3QA.Tests\bin\Debug\Mvc3QA.Tests.dll
+E:\Code\Mvc3QA\Mvc3QA\Mvc3QA.Tests\bin\Debug\Mvc3QA.Tests.pdb
+E:\Code\Mvc3QA\Mvc3QA\Mvc3QA.Tests\bin\Debug\Mvc3QA.dll
+E:\Code\Mvc3QA\Mvc3QA\Mvc3QA.Tests\bin\Debug\EntityFramework.dll
+E:\Code\Mvc3QA\Mvc3QA\Mvc3QA.Tests\bin\Debug\Common.dll
+E:\Code\Mvc3QA\Mvc3QA\Mvc3QA.Tests\bin\Debug\Resource.dll
+E:\Code\Mvc3QA\Mvc3QA\Mvc3QA.Tests\bin\Debug\HtmlAgilityPack.dll
+E:\Code\Mvc3QA\Mvc3QA\Mvc3QA.Tests\bin\Debug\Mvc3QA.pdb
+E:\Code\Mvc3QA\Mvc3QA\Mvc3QA.Tests\bin\Debug\EntityFramework.xml
+E:\Code\Mvc3QA\Mvc3QA\Mvc3QA.Tests\bin\Debug\Common.pdb
+E:\Code\Mvc3QA\Mvc3QA\Mvc3QA.Tests\bin\Debug\Resource.pdb
+E:\Code\Mvc3QA\Mvc3QA\Mvc3QA.Tests\bin\Debug\en-us\Resource.resources.dll
+E:\Code\Mvc3QA\Mvc3QA\Mvc3QA.Tests\bin\Debug\zh-tw\Resource.resources.dll
+E:\Code\Mvc3QA\Mvc3QA\Mvc3QA.Tests\obj\Debug\ResolveAssemblyReference.cache
+E:\Code\Mvc3QA\Mvc3QA\Mvc3QA.Tests\obj\Debug\Mvc3QA.Tests.dll
+E:\Code\Mvc3QA\Mvc3QA\Mvc3QA.Tests\obj\Debug\Mvc3QA.Tests.pdb

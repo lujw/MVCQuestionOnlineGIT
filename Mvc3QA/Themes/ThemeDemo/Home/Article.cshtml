@@ -1,0 +1,53 @@
+﻿@model YQBlog.Models.blog_varticle  
+@using res = Resource.Views.Home.Home;      
+@{YQBlog.General.GeneralConfigInfo ci = ViewBag.CI as YQBlog.General.GeneralConfigInfo;} 
+@section Seo{
+    @Html.Raw(ViewBag.Seo)
+}
+<div class="web_path">@res.Path：@Html.ActionLink(res.HomePage, "Index", "Home") \ @Html.Raw(ViewBag.WebPath)</div>
+<div class="article_view">
+    <h3 class="article_title">@Model.title</h3>
+    <div class="article_time">
+    &nbsp;
+    @Model.createdate
+    &nbsp;
+    @(res.View)(@Model.viewcount) 
+    &nbsp;
+    @if (Model.subcount > 0)
+    {
+    <a href="#comment">@(res.Comment)(@Model.subcount)</a> 
+    }
+    </div>
+    <div class="article_summary">@Html.Raw(Model.summary)</div>
+    <div class="article_content">@Html.Raw(Model.content)</div>
+    @{
+            
+        string[] tagArray = Model.tags.Trim().Split(',');
+        if (tagArray.Length > 0 && Model.tags.Trim().Length > 0)
+        {
+            @res.Tag@:：
+            for (int i = 0; i < Model.tags.Split(',').Length; i++)
+            {
+                     
+                <a href="@res.UrlPath/Tag/@System.Web.HttpUtility.UrlEncode(tagArray[i].Replace(".", "@"), System.Text.Encoding.UTF8).Replace("+", "%20")">@tagArray[i]</a>
+            }
+        }
+    }
+</div>
+<div class="articletool">
+    <div class="digg">
+        <div class="digg_favor">@Model.favor</div>
+        <div class="digg_against">@Model.against</div>
+        <div class="digg_tip">@ViewBag.VoteTip</div>
+    </div>
+    <div class="prenextlink">@Html.Raw(ViewBag.PreNextLink)</div>
+</div>
+@Html.Action("reply", "home", new { id = Model.id })
+@section Js{
+<script type="text/javascript">
+    var ArticleId = @ViewBag.ArticleId;
+    $(function () {
+        GetComment(1);
+    });
+</script> 
+}

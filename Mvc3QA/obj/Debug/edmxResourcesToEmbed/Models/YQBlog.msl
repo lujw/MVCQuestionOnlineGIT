@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="YQBlogModelStoreContainer" CdmEntityContainer="YQBlogEntities">
+    <EntitySetMapping Name="blog_article">
+      <EntityTypeMapping TypeName="YQBlogModel.blog_article">
+        <MappingFragment StoreEntitySet="blog_article">
+          <ScalarProperty Name="lastreplyuser" ColumnName="lastreplyuser" />
+          <ScalarProperty Name="lastreplydate" ColumnName="lastreplydate" />
+          <ScalarProperty Name="createdate" ColumnName="createdate" />
+          <ScalarProperty Name="istop" ColumnName="istop" />
+          <ScalarProperty Name="iscommend" ColumnName="iscommend" />
+          <ScalarProperty Name="against" ColumnName="against" />
+          <ScalarProperty Name="favor" ColumnName="favor" />
+          <ScalarProperty Name="ip" ColumnName="ip" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="replypermit" ColumnName="replypermit" />
+          <ScalarProperty Name="orderid" ColumnName="orderid" />
+          <ScalarProperty Name="viewcount" ColumnName="viewcount" />
+          <ScalarProperty Name="content" ColumnName="content" />
+          <ScalarProperty Name="summary" ColumnName="summary" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="userid" ColumnName="userid" />
+          <ScalarProperty Name="catename" ColumnName="catename" />
+          <ScalarProperty Name="subcount" ColumnName="subcount" />
+          <ScalarProperty Name="layer" ColumnName="layer" />
+          <ScalarProperty Name="parentid" ColumnName="parentid" />
+          <ScalarProperty Name="articleid" ColumnName="articleid" />
+          <ScalarProperty Name="catepath" ColumnName="catepath" />
+          <ScalarProperty Name="cateid" ColumnName="cateid" />
+          <ScalarProperty Name="typeid" ColumnName="typeid" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="blog_articledetail">
+      <EntityTypeMapping TypeName="YQBlogModel.blog_articledetail">
+        <MappingFragment StoreEntitySet="blog_articledetail">
+          <ScalarProperty Name="tags" ColumnName="tags" />
+          <ScalarProperty Name="rename" ColumnName="rename" />
+          <ScalarProperty Name="seometas" ColumnName="seometas" />
+          <ScalarProperty Name="seokeywords" ColumnName="seokeywords" />
+          <ScalarProperty Name="seodescription" ColumnName="seodescription" />
+          <ScalarProperty Name="seotitle" ColumnName="seotitle" />
+          <ScalarProperty Name="articleid" ColumnName="articleid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="blog_varticle">
+      <EntityTypeMapping TypeName="YQBlogModel.blog_varticle">
+        <MappingFragment StoreEntitySet="blog_varticle">
+          <ScalarProperty Name="url" ColumnName="url" />
+          <ScalarProperty Name="tags" ColumnName="tags" />
+          <ScalarProperty Name="rename" ColumnName="rename" />
+          <ScalarProperty Name="seometas" ColumnName="seometas" />
+          <ScalarProperty Name="seokeywords" ColumnName="seokeywords" />
+          <ScalarProperty Name="seodescription" ColumnName="seodescription" />
+          <ScalarProperty Name="seotitle" ColumnName="seotitle" />
+          <ScalarProperty Name="lastreplyuser" ColumnName="lastreplyuser" />
+          <ScalarProperty Name="lastreplydate" ColumnName="lastreplydate" />
+          <ScalarProperty Name="createdate" ColumnName="createdate" />
+          <ScalarProperty Name="istop" ColumnName="istop" />
+          <ScalarProperty Name="iscommend" ColumnName="iscommend" />
+          <ScalarProperty Name="against" ColumnName="against" />
+          <ScalarProperty Name="favor" ColumnName="favor" />
+          <ScalarProperty Name="ip" ColumnName="ip" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="replypermit" ColumnName="replypermit" />
+          <ScalarProperty Name="orderid" ColumnName="orderid" />
+          <ScalarProperty Name="viewcount" ColumnName="viewcount" />
+          <ScalarProperty Name="content" ColumnName="content" />
+          <ScalarProperty Name="summary" ColumnName="summary" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="userid" ColumnName="userid" />
+          <ScalarProperty Name="catename" ColumnName="catename" />
+          <ScalarProperty Name="subcount" ColumnName="subcount" />
+          <ScalarProperty Name="layer" ColumnName="layer" />
+          <ScalarProperty Name="parentid" ColumnName="parentid" />
+          <ScalarProperty Name="articleid" ColumnName="articleid" />
+          <ScalarProperty Name="catepath" ColumnName="catepath" />
+          <ScalarProperty Name="cateid" ColumnName="cateid" />
+          <ScalarProperty Name="typeid" ColumnName="typeid" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="YQBlogModel.blog_varticle">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="YQBlogModel.Store.blog_createarticle">
+            <ScalarProperty Name="istop" ParameterName="istop" />
+            <ScalarProperty Name="iscommend" ParameterName="iscommend" />
+            <ScalarProperty Name="tags" ParameterName="tags" />
+            <ScalarProperty Name="rename" ParameterName="rename" />
+            <ScalarProperty Name="seometas" ParameterName="seometas" />
+            <ScalarProperty Name="seokeywords" ParameterName="seokeywords" />
+            <ScalarProperty Name="seodescription" ParameterName="seodescription" />
+            <ScalarProperty Name="seotitle" ParameterName="seotitle" />
+            <ScalarProperty Name="ip" ParameterName="ip" />
+            <ScalarProperty Name="status" ParameterName="status" />
+            <ScalarProperty Name="replypermit" ParameterName="replypermit" />
+            <ScalarProperty Name="content" ParameterName="content" />
+            <ScalarProperty Name="summary" ParameterName="summary" />
+            <ScalarProperty Name="title" ParameterName="title" />
+            <ScalarProperty Name="username" ParameterName="username" />
+            <ScalarProperty Name="userid" ParameterName="userid" />
+            <ScalarProperty Name="catename" ParameterName="catename" />
+            <ScalarProperty Name="layer" ParameterName="layer" />
+            <ScalarProperty Name="parentid" ParameterName="parentid" />
+            <ScalarProperty Name="articleid" ParameterName="articleid" />
+            <ScalarProperty Name="catepath" ParameterName="catepath" />
+            <ScalarProperty Name="cateid" ParameterName="cateid" />
+            <ScalarProperty Name="typeid" ParameterName="typeid" />
+            <ResultBinding Name="id" ColumnName="articleid" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="YQBlogModel.Store.blog_updatearticle">
+            <ScalarProperty Name="id" ParameterName="aid" Version="Current" />
+            <ScalarProperty Name="istop" ParameterName="istop" Version="Current" />
+            <ScalarProperty Name="iscommend" ParameterName="iscommend" Version="Current" />
+            <ScalarProperty Name="tags" ParameterName="tags" Version="Current" />
+            <ScalarProperty Name="rename" ParameterName="rename" Version="Current" />
+            <ScalarProperty Name="seometas" ParameterName="seometas" Version="Current" />
+            <ScalarProperty Name="seokeywords" ParameterName="seokeywords" Version="Current" />
+            <ScalarProperty Name="seodescription" ParameterName="seodescription" Version="Current" />
+            <ScalarProperty Name="seotitle" ParameterName="seotitle" Version="Current" />
+            <ScalarProperty Name="status" ParameterName="status" Version="Current" />
+            <ScalarProperty Name="replypermit" ParameterName="replypermit" Version="Current" />
+            <ScalarProperty Name="content" ParameterName="content" Version="Current" />
+            <ScalarProperty Name="summary" ParameterName="summary" Version="Current" />
+            <ScalarProperty Name="title" ParameterName="title" Version="Current" />
+            <ScalarProperty Name="parentid" ParameterName="parentid" Version="Current" />
+            <ScalarProperty Name="catepath" ParameterName="catepath" Version="Current" />
+            <ScalarProperty Name="catename" ParameterName="catename" Version="Current" />
+            <ScalarProperty Name="cateid" ParameterName="cateid" Version="Current" />
+            <ScalarProperty Name="typeid" ParameterName="typeid" Version="Current" />
+          </UpdateFunction>
+          <DeleteFunction FunctionName="YQBlogModel.Store.blog_deletearticle">
+            <ScalarProperty Name="id" ParameterName="aid" />
+            <ScalarProperty Name="parentid" ParameterName="parentid" />
+          </DeleteFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="fun_articledel" FunctionName="YQBlogModel.Store.blog_deletearticle" />
+  </EntityContainerMapping>
+</Mapping>

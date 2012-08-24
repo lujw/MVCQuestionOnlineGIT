@@ -1,0 +1,182 @@
+﻿@model Mvc3QA.Models.CategoryModel
+@using res = Resource.Views.Admin.Admin;
+@{Mvc3QA.General.GeneralConfigInfo ci = ViewBag.CI as Mvc3QA.General.GeneralConfigInfo;}
+<script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<div class="row-fluid">
+    <div class="span12">
+        <ul class="nav nav-tabs">
+            <li><a href="#">管理首页</a></li>
+            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">问题管理
+                <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">查看问题</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">修改</a></li>
+                </ul>
+            </li>
+            <li class="dropdown  active"><a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                配置管理 <b class="caret bottom-up"></b></a>
+                <ul class="dropdown-menu bottom-up pull-right">
+                    <li>@Html.ActionLink(res.BasisSet, "AdminBaseConfig", "Admin")</li>
+                    <li class="divider"></li>
+                    <li>@Html.ActionLink(res.CategorySettings, "AdminCategorySort", "Admin")</li>
+                </ul>
+            </li>
+            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">用户管理
+                <b class="caret bottom-up"></b></a>
+                <ul class="dropdown-menu bottom-up pull-right">
+                    <li>@Html.ActionLink("-" + res.UserManagement + " -", "AdminUserList", "Admin")</li>
+                    <li class="divider"></li>
+                    <li>@Html.ActionLink(res.Administrators, "AdminManagerList", "Admin")</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="span12">
+        <ul class="breadcrumb">
+            <li class="active">
+                @if (ViewBag.CateId == 0)
+                {
+                    @res.AddCategory
+                }
+                else
+                {
+                    string t = res.Add + " \"" + ViewBag.CateName + "\" " + res.Subcategories;
+                    @t              
+                }</li>
+        </ul>
+    </div>
+    <div class="span12 well">
+        @using (Ajax.BeginForm("AdminCategoryAdd", "Admin", new AjaxOptions { LoadingElementId = "Loading", InsertionMode = InsertionMode.InsertBefore, OnSuccess = "ProcessSuccess" }, new { @class = "form-horizontal" }))
+        {
+            <div id="AjaxResult">
+                @Html.HiddenFor(m => m.ParentId)
+                <div class="control-group">
+                    <div class="control-label">
+                        @Html.LabelFor(m => m.CateName)
+                    </div>
+                    <div class="controls">
+                        @Html.TextBoxFor(m => m.CateName, new { style = "width: 200px;" })
+                        @Html.ValidationMessageFor(m => m.CateName)
+                    </div>
+                </div>
+                @if (ViewBag.CateId == 0)
+                {
+                    <div class="control-group">
+                        <div class="control-label">
+                            @Html.LabelFor(m => m.Type)
+                        </div>
+                        <div class="controls">
+                            @Html.DropDownList("Type", ViewData["Type"] as IEnumerable<SelectListItem>)
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    @Html.HiddenFor(m => m.Type)
+                }
+                <div class="control-group">
+                    <div class="control-label">
+                        @Html.LabelFor(m => m.ReplyPermit)
+                    </div>
+                    <div class="controls">
+                        <label for="ReplyPermit_y" class="radio">
+                            @res.AllowComments
+                            <input type="radio" value="1" name="ReplyPermit" id="ReplyPermit_y" checked="checked" />
+                        </label>
+                        <label for="ReplyPermit_n" class="radio">
+                            @res.NoComments
+                            <input type="radio" value="2" name="ReplyPermit" id="ReplyPermit_n" />
+                        </label>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="control-label">
+                        @Html.LabelFor(m => m.IsNav)
+                    </div>
+                    <div class="controls">
+                        <label for="IsNav_y" class="radio">
+                            @res.Show
+                            <input type="radio" value="1" name="IsNav" id="IsNav_y" checked="checked" />
+                        </label>
+                        <label for="IsNav_n" class="radio">
+                            @res.NoShow
+                            <input type="radio" value="2" name="IsNav" id="IsNav_n" />
+                        </label>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="control-label">
+                        @Html.LabelFor(m => m.IsIndex)
+                    </div>
+                    <div class="controls">
+                        <label for="IsIndex_y" class="radio">
+                            @res.Show
+                            <input type="radio" value="1" name="IsIndex" id="IsIndex_y" />
+                        </label>
+                        <label for="IsIndex_n" class="radio">
+                            @res.NoShow
+                            <input type="radio" value="2" name="IsIndex" id="IsIndex_n" checked="checked" />
+                        </label>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="control-label">
+                        @Html.LabelFor(m => m.ListNum)
+                    </div>
+                    <div class="controls">
+                        @Html.TextBoxFor(m => m.ListNum, new { style = "width: 30px;" })
+                        @Html.ValidationMessageFor(m => m.ListNum)
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="control-label">
+                        @Html.LabelFor(m => m.ReName)
+                    </div>
+                    <div class="controls">
+                        @Html.TextBoxFor(m => m.ReName, new { style = "width: 200px;" })
+                        @Html.ValidationMessageFor(m => m.ReName)
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="control-label">
+                        @Html.LabelFor(m => m.CustomView)
+                    </div>
+                    <div class="controls">
+                        @Html.TextBoxFor(m => m.CustomView, new { style = "width: 200px;" })
+                        @Html.ValidationMessageFor(m => m.CustomView)
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="control-label">
+                        @Html.LabelFor(m => m.Status)
+                    </div>
+                    <div class="controls">
+                        <label for="Status_y" class="radio">
+                            @res.Normal
+                            <input type="radio" value="1" name="Status" id="Status_y" checked="checked" />
+                        </label>
+                        <label for="Status_n" class="radio">
+                            @res.Close
+                            <input type="radio" value="2" name="Status" id="Status_n" />
+                        </label>
+                    </div>
+                </div>
+                <div>
+                    <input type="submit" name="BtnSubmit" id="BtnSubmit" class="btn btn-primary" value="保存" />
+                    <span id="Loading" style="display: none;">@res.Ajax_Tip</span>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+@section Js{
+    <script type="text/javascript">
+        function ProcessSuccess(re) {
+            //$('#AjaxResult').html(re);
+            window.location = "/QAAdmin/Admin/AdminCategorySort";
+        }
+    </script>
+}

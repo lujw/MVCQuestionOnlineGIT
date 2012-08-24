@@ -1,0 +1,182 @@
+﻿@model  Webdiyer.WebControls.Mvc.PagedList<Mvc3QA.Models.Accounts_Users>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@using (Html.BeginForm())
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString") &nbsp;
+        <input type="submit" value="Search" /></p>
+}
+<table class="table table-bordered">
+ <thead>
+    <tr>
+        <th>
+            UserID
+        </th>
+        <th>
+            Password
+        </th>
+        <th>
+            EmailAddress
+        </th>
+        <th>
+            DisplayName
+        </th>
+        <th>
+            UserState
+        </th>
+        <th>
+            Accounts_Department
+        </th>
+        <th>
+            Address
+        </th>
+        <th>
+            OfficePhone
+        </th>
+        <th>
+            MobilePhone
+        </th>
+        <th>
+            MSN
+        </th>
+        <th>
+            PasswordNote
+        </th>
+        <th>
+            Remark
+        </th>
+        <th>
+            AccessListID
+        </th>
+        <th>
+            BindIP
+        </th>
+        <th>
+            BindIPString
+        </th>
+        <th>
+            AgentUserID
+        </th>
+        <th>
+            ExtendedSettings
+        </th>
+        <th>
+            LoginName
+        </th>
+        <th>
+            ExpireDate
+        </th>
+        <th>
+            Attributes
+        </th>
+        <th></th>
+    </tr>
+     </thead>
+      <tbody>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Password)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmailAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DisplayName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UserState)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Accounts_Department.DeptName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OfficePhone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MobilePhone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MSN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PasswordNote)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Remark)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AccessListID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BindIP)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BindIPString)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AgentUserID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExtendedSettings)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LoginName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExpireDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Attributes)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.UserID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.UserID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.UserID })
+        </td>
+    </tr>
+}
+ </tbody>
+</table>
+<p>共有 @Model.TotalItemCount 条记录     @Model.CurrentPageIndex/@Model.TotalPageCount</p>
+
+ @Html.Pager(Model, new PagerOptions { PageIndexParameterName = "page", ShowPageIndexBox = false, PageIndexBoxType = PageIndexBoxType.TextBox, PageIndexBoxWrapperFormatString = "请输入页数{0}" }, "Default", new { sortOrder = ViewBag.DateSortParm, searchString = ViewBag.Filter })
+@section JS{
+<script type="text/javascript">
+    $(function () {
+        $("[name='Delete']").click(
+        function () {
+            if (confirm("确定要删除这条记录么？")) {
+                var statusid = $(this).attr("statusid");
+                var tr = $(this).parent().parent();
+
+                $.post("Status/Delete/", { id: statusid }, function (data) {
+                    if (data == "-1") {
+                        alert("删除失败");
+                    }
+                    else {
+                        $(tr).remove();
+                        alert("删除成功");
+                    }
+
+                });
+            }
+        }
+        );
+    });
+</script>
+}

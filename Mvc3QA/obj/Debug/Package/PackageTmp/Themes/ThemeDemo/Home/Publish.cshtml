@@ -1,0 +1,43 @@
+﻿@model YQBlog.Models.ArticleModel
+@using res = Resource.Views.Home.Home;
+@{
+    YQBlog.General.GeneralConfigInfo ci = ViewBag.CI as YQBlog.General.GeneralConfigInfo;
+    ViewBag.Title = res.Contributors;
+}
+<div class="web_path">@res.Path：@Html.ActionLink(res.HomePage, "Index", "Home") \ @res.Contributors</div>
+<h2>@res.Contributors</h2>
+<div class="publish_main"> 
+    <fieldset>
+    <legend>@res.ArticleReproduced</legend>
+    <br/>
+    Url:
+    <!--@Html.TextBox("WebUrl", "", new { @class = "xxx" })-->
+    @Html.TextBox("WebUrl", "", new { style = "width: 400px;" })
+    @Html.DropDownList("PublishWebId", (SelectList)ViewData["PublishWeb"])
+    @Html.DropDownList("WebCateId", (SelectList)ViewData["CateId"])
+    <input type="button" class="BtnPublishWeb" value='@res.Submit' />
+    <div class="PublishWebTip field-validation-error"></div>
+    </fieldset>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $(".BtnPublishWeb").click(function () {
+            if ($('#WebUrl').val().replace(/\s/g, "") == "") {
+                $(".PublishWebTip").html("@(res.Url_Tip)"); return;
+            }
+            $(".PublishWebTip").html("@(res.Ajax_Wait)");
+            $.ajax({
+                url: "/home/PublishWeb/",
+                type: "post",
+                data: { cateid: $('#WebCateId').val(), publishwebid: $('#PublishWebId').val(), url: $('#WebUrl').val() },
+                dataType: 'json',
+                success: function (re) {
+                    $(".PublishWebTip").html(re["message"]);
+                    if (re["error"] == "0") {
+                        $('#WebUrl').val("");
+                    }
+                }
+            });
+        });
+    });
+</script> 

@@ -1,0 +1,40 @@
+﻿@model IEnumerable<YQBlog.Models.AlbumModel> 
+@using res = Resource.Views.Home.Home;
+@{YQBlog.General.GeneralConfigInfo ci = ViewBag.CI as YQBlog.General.GeneralConfigInfo;}
+<div class="web_path">@res.Path：@Html.ActionLink(res.HomePage, "Index", "Home") \ @Html.Raw(ViewBag.WebPath)</div>
+<div class="page_wrap album">
+<h2>@res.AlbumList</h2>
+    @if ((Model as IEnumerable<YQBlog.Models.AlbumModel>).Count() > 0)
+    {
+        var headstr = "";
+        <div class="albumlist">
+            @foreach (var item in Model)
+            {
+                if (item.ImgCount > 0)
+                {
+                    if (headstr != item.AlbumCategory)
+                    {
+                        headstr = item.AlbumCategory;
+                        <div class="album_folder"><h3>@item.AlbumCategory</h3></div> 
+                    }
+                    <div class="album_box">
+                      <div class="album_cover"><a href="@res.UrlPath/album/@(item.Id)"><img src="@(item.Cover.Src)" alt="@item.Description"/></a></div>
+                      <p class="album_title">
+                           <a href="@res.UrlPath/album/@(item.Id)">@(item.Title) (@item.ImgCount)</a>
+                           @if (item.CommentCount > 0)
+                           {   
+                            <a title="Comment" href="@res.UrlPath/album/@(item.Id)#comments"> @(item.CommentCount) @res.Comments</a> 
+                           }  
+                      </p>
+                    </div>  
+                }
+            }
+        </div>
+    }
+    else
+    {
+        <h2 class="red">@res.NoData</h2> 
+    }
+</div>
+<div id="sidebar">
+</div>

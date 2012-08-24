@@ -1,0 +1,143 @@
+﻿@model Mvc3QA.Models.Pts_Records
+@using res = Resource.Views.Admin.Admin;
+@{Mvc3QA.General.GeneralConfigInfo ci = ViewBag.CI as Mvc3QA.General.GeneralConfigInfo;}
+@{
+    ViewBag.Title = "回复问题";
+}
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/kindeditor/kindeditor.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/kindeditor/lang/zh_CN.js")" type="text/javascript"></script>
+@Html.Action("QuestionCount", "Problems")
+<div class="row-fluid">
+  
+    <div class="span12">
+        @using (Html.BeginForm("Create", "Records", FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            @Html.ValidationSummary(true)
+            <fieldset>
+                <legend>回复问题</legend>
+                @Html.HiddenFor(model => model.ProblemID)
+                <div class="control-group">
+                    <label class="control-label">
+                        处理方式</label>
+                    <div class="controls">
+                        <label class="radio">
+                            <input type="radio" name="AssignType" id="dealing" value="1" checked="">
+                            直接解决
+                        </label>
+                        <label class="radio">
+                            <input type="radio" name="AssignType" id="transmit" value="2">
+                            转交其他人处理
+                        </label>
+                        <label class="radio">
+                            <input type="radio" name="AssignType" id="nodealing" value="3">
+                            不解决
+                        </label>
+                    </div>
+                </div>
+                <div class="control-group" id="AssignedToDiv" style="display: none;">
+                    <div class="control-label">
+                        选择问题接收人或部门
+                    </div>
+                    <div class="controls">
+                        @Html.DropDownList("AssignTo")<select id="AssignToObjectID" name="AssignToObjectID">
+                            <option value="0">部门所有人可见</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="control-label">
+                        处理意见
+                    </div>
+                    <div class="controls">
+                        @Html.TextAreaFor(model => model.Content, new { style = "width: 700px; height: 300px" })
+                        @Html.ValidationMessageFor(model => model.Content)
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary" id="BtnSubmit" name="BtnSubmit">
+                        保存</button>
+                    <span style="display: none;" id="Loading">提交中...</span>
+                    <button class="btn">
+                        取消</button>
+                </div>
+            </fieldset>
+        }
+        
+    </div>
+</div>
+@section Js{
+    <script type="text/javascript">   
+        $(function () {
+        $(":radio").click(
+        function(){  
+       if ($('input:radio[name="AssignType"]:checked').val()==2) {
+       $("#AssignedToDiv").show();
+     }else {
+      $("#AssignedToDiv").hide();
+    }
+        }       
+        );
+       
+       //默认加载
+          var Did2 = $("#AssignTo").val();
+               $("#AssignToObjectID").find("option").remove();  //清空                              
+                $.post("@Url.Content("~/Problems/GetDeptUser/")", { id: Did2 }, function (data) {
+                    if (data == "-1") {
+                        alert("删除失败");
+                    }
+                    else {$.each(data,function(index,item){  $("<option></option>").val(item["Value"]).text(item["Text"]).appendTo($("#AssignToObjectID")); })                   
+                   
+                    }
+
+                });
+                //改变加载
+         $("[name='AssignTo']").change(
+        function () {
+         
+                var Did = $(this).attr("value");
+               $("#AssignToObjectID").find("option").remove();  //清空                              
+                $.post("@Url.Content("~/Problems/GetDeptUser/")", { id: Did }, function (data) {
+                    if (data == "-1") {
+                        alert("删除失败");
+                    }
+                    else {$.each(data,function(index,item){  $("<option></option>").val(item["Value"]).text(item["Text"]).appendTo($("#AssignToObjectID")); })                   
+                   
+                    }
+
+                });
+           
+        }
+       );
+      
+            $("#List").click(
+                    function () {
+                    var Did= $('input:[name="ProblemID"]').val();
+           $.post("@Url.Content("~/Problems/AdminRecords")", { id: Did }, function (data) {
+          $("#lB").empty();
+           $("#lB").append(data);      
+        });
+                    })
+
+        })
+      $(function () {
+            var editorContent = null;
+            KindEditor.ready(function (K) {
+                editorContent = K.create('textarea[name="Content"]', {
+                    allowImageUpload: true,
+                    uploadJson: '/admin/UploadFile'
+                });
+            });
+          
+
+            $("#BtnSubmit").click(function () {
+                editorContent.html(ReplaceKESpace(editorContent.html()));
+                editorContent.sync();
+            });
+        });
+        function ProcessSuccess(re) {         
+            $('#AjaxResult').html(re);
+        }
+    </script>
+}

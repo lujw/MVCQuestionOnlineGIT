@@ -1,0 +1,256 @@
+﻿@model Mvc3QA.General.GeneralConfigInfo
+@using res = Resource.Views.Admin.Admin;
+@{Mvc3QA.General.GeneralConfigInfo ci = ViewBag.CI as Mvc3QA.General.GeneralConfigInfo;}
+<script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<div class="row-fluid">
+    <div class="span12">
+        <ul class="nav nav-tabs">
+            <li><a href="#">管理首页</a></li>
+            <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">问题管理
+                <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">查看问题</a></li>
+                    <li class="divider"></li>
+                    <li><a href="#">修改</a></li>
+                </ul>
+            </li>
+            <li class="dropdown active"><a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                配置管理 <b class="caret bottom-up"></b></a>
+                <ul class="dropdown-menu bottom-up pull-right">
+                    <li>@Html.ActionLink(res.BasisSet, "AdminBaseConfig", "Admin")</li>
+                    <li class="divider"></li>
+                    <li>@Html.ActionLink(res.CategorySettings, "AdminCategorySort", "Admin")</li>
+                </ul>
+            </li>
+            <li class="dropdown "><a class="dropdown-toggle" data-toggle="dropdown" href="#">用户管理
+                <b class="caret bottom-up"></b></a>
+                <ul class="dropdown-menu bottom-up pull-right">
+                    <li>@Html.ActionLink("-" + res.UserManagement + " -", "AdminUserList", "Admin")</li>
+                    <li class="divider"></li>
+                    <li>@Html.ActionLink(res.Administrators, "AdminManagerList", "Admin")</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div class="span12">
+        @using (Ajax.BeginForm("AdminBaseConfig", "Admin", new AjaxOptions { LoadingElementId = "Loading", InsertionMode = InsertionMode.InsertBefore, OnSuccess = "ProcessSuccess" }, new { @class = "form-horizontal" }))
+        {          
+            <div id="AjaxResult">
+                <div class="tabbable" style="margin-bottom: 9px;">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#1" data-toggle="tab">基本设置</a></li>
+                        <li><a href="#2" data-toggle="tab">邮件发送设置</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="1">
+                            <div id="box-1" class="tab1-box">
+                                <div class="control-group">
+                                    <div class="control-label">
+                                        @Html.LabelFor(m => m.Webtitle)
+                                    </div>
+                                    <div class="controls">
+                                        @Html.TextBoxFor(m => m.Webtitle, new { style = "width: 500px;" })
+                                        @Html.ValidationMessageFor(m => m.Webtitle)
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <div class="control-label">
+                                        @Html.LabelFor(m => m.WebDescription)
+                                    </div>
+                                    <div class="controls">
+                                        @Html.TextAreaFor(model => model.WebDescription, new { style = "width: 500px; height:60px" })
+                                        @Html.ValidationMessageFor(m => m.WebDescription)
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <div class="control-label">
+                                        @Html.LabelFor(m => m.Weburl)
+                                    </div>
+                                    <div class="controls">
+                                        @Html.TextBoxFor(m => m.Weburl, new { style = "width: 500px;" })
+                                        @Html.ValidationMessageFor(m => m.Weburl)
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <div class="control-label">
+                                        @Html.LabelFor(m => m.WebPath)
+                                    </div>
+                                    <div class="controls">
+                                        @Html.TextBoxFor(m => m.WebPath, new { style = "width: 200px;" })
+                                        @Html.ValidationMessageFor(m => m.WebPath)
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <div class="control-label">
+                                        @Html.LabelFor(m => m.Theme)
+                                    </div>
+                                    <div class="controls">
+                                        @Html.DropDownList("Theme")
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <div class="control-label">
+                                        @Html.LabelFor(m => m.DefaultLang)
+                                    </div>
+                                    <div class="controls">
+                                        @Html.DropDownList("DefaultLang")
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <div class="control-label">
+                                        @Html.LabelFor(m => m.Icp)
+                                    </div>
+                                    <div class="controls">
+                                        @Html.TextBoxFor(m => m.Icp, new { style = "width: 200px;" })
+                                        @Html.ValidationMessageFor(m => m.Icp)
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <div class="control-label">
+                                        @Html.LabelFor(m => m.IndexPagerCount)
+                                    </div>
+                                    <div class="controls">
+                                        @Html.TextBoxFor(m => m.IndexPagerCount, new { style = "width: 30px;" })
+                                        @Html.ValidationMessageFor(m => m.IndexPagerCount)
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <div class="control-label">
+                                        @Html.LabelFor(m => m.CatePagerCount)
+                                    </div>
+                                    <div class="controls">
+                                        @Html.TextBoxFor(m => m.CatePagerCount, new { style = "width: 30px;" })
+                                        @Html.ValidationMessageFor(m => m.CatePagerCount)
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <div class="control-label">
+                                        @Html.LabelFor(m => m.CommentPagerCount)
+                                    </div>
+                                    <div class="controls">
+                                        @Html.TextBoxFor(m => m.CommentPagerCount, new { style = "width: 30px;" })
+                                        @Html.ValidationMessageFor(m => m.CommentPagerCount)
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <div class="control-label">
+                                        @Html.LabelFor(m => m.NotePagerCount)
+                                    </div>
+                                    <div class="controls">
+                                        @Html.TextBoxFor(m => m.NotePagerCount, new { style = "width: 30px;" })
+                                        @Html.ValidationMessageFor(m => m.NotePagerCount)
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <div class="control-label">
+                                        @Html.LabelFor(m => m.ThumbnailInfo)
+                                    </div>
+                                    <div class="controls">
+                                        @Html.TextBoxFor(m => m.ThumbnailInfo, new { style = "width: 200px;" })
+                                        @Html.ValidationMessageFor(m => m.ThumbnailInfo)
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <div class="control-label">
+                                        @Html.LabelFor(m => m.ContributorCateIds)
+                                    </div>
+                                    <div class="controls">
+                                        @Html.TextBoxFor(m => m.ContributorCateIds, new { style = "width: 200px;" })
+                                        @Html.ValidationMessageFor(m => m.ContributorCateIds)
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <div class="control-label">
+                                        @Html.LabelFor(m => m.MaxSummaryCharCount)
+                                    </div>
+                                    <div class="controls">
+                                        @Html.TextBoxFor(m => m.MaxSummaryCharCount, new { style = "width: 30px;" })
+                                        @Html.ValidationMessageFor(m => m.MaxSummaryCharCount)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="2">
+                            <div id="box-2" class="tab1-box">
+                                <div class="control-group">
+                                    <div class="control-label">
+                                        @Html.LabelFor(model => model.IfSendReplyEmail)
+                                    </div>
+                                    <div class="controls">
+                                        <label for="IfSendReplyEmail_y" class="radio">
+                                            YES
+                                            <input type="radio" value="1" name="IfSendReplyEmail" id="IfSendReplyEmail_y" @if (Model.IfSendReplyEmail == 1)
+                                                                                                                          {@Html.Raw("checked=\"checked\"")}/></label>
+                                        <label for="IfSendReplyEmail_n" class="radio">
+                                            NO
+                                            <input type="radio" value="2" name="IfSendReplyEmail" id="IfSendReplyEmail_n" @if (Model.IfSendReplyEmail == 2)
+                                                                                                                          {@Html.Raw("checked=\"checked\"")}/></label>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <div class="control-label">
+                                        @Html.LabelFor(m => m.SmtpServer)
+                                    </div>
+                                    <div class="controls">
+                                        @Html.TextBoxFor(m => m.SmtpServer, new { style = "width: 300px;" })
+                                        @Html.ValidationMessageFor(m => m.SmtpServer)
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <div class="control-label">
+                                        @Html.LabelFor(m => m.SmtpPort)
+                                    </div>
+                                    <div class="controls">
+                                        @Html.TextBoxFor(m => m.SmtpPort, new { style = "width: 50px;" })
+                                        @Html.ValidationMessageFor(m => m.SmtpPort)
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <div class="control-label">
+                                        @Html.LabelFor(m => m.SmtpUser)
+                                    </div>
+                                    <div class="controls">
+                                        @Html.TextBoxFor(m => m.SmtpUser, new { style = "width: 300px;" })
+                                        @Html.ValidationMessageFor(m => m.SmtpUser)
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <div class="control-label">
+                                        @Html.LabelFor(m => m.AdminEmail)
+                                    </div>
+                                    <div class="controls">
+                                        @Html.TextBoxFor(m => m.AdminEmail, new { style = "width: 300px;" })
+                                        @Html.ValidationMessageFor(m => m.AdminEmail)
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <div class="control-label">
+                                        @Html.LabelFor(m => m.SmtpPass)
+                                    </div>
+                                    <div class="controls">
+                                        @Html.PasswordFor(m => m.SmtpPass, new { style = "width: 300px;", value = Model.SmtpPass })
+                                        @Html.ValidationMessageFor(m => m.SmtpPass)
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <input type="submit" name="BtnSubmit" id="BtnSubmit" class="btn btn-primary" value="保存" />
+                    <span id="Loading" style="display: none;">@res.Ajax_Tip</span>
+                </div>
+            </div>            
+        }
+    </div>
+</div>
+@section Js{
+    <script type="text/javascript">
+        function ProcessSuccess(re) {         
+            $('#AjaxResult').html(re);
+        }
+       
+    </script>
+}

@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Mvc3QA.Models.Pts_ProblemState>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<p>
+    @Html.ActionLink("添加状态", "Create", null, new { @class = "btn" })
+</p>
+<table class="table table-bordered">
+    <thead>
+    <tr>
+     
+        <th>
+           状态名称
+        </th>
+        <th>
+            描述
+        </th>
+    
+        <th></th>
+    </tr>
+</thead>
+<tbody>
+@foreach (var item in Model) {
+    <tr>
+    
+        <td>
+            @Html.DisplayFor(modelItem => item.StateName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+     
+      
+        <td>
+            @Html.ActionLink("修改", "Edit", new { id=item.ProblemStateID }) |
+            @Html.ActionLink("详细信息", "Details", new { id = item.ProblemStateID }) |
+            @Html.ActionLink("删除", "Delete", new { id = item.ProblemStateID })
+        </td>
+    </tr>
+}
+</tbody>
+</table>

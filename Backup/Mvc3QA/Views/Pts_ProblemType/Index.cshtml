@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Mvc3QA.Models.Pts_ProblemType>
+@{
+    ViewBag.Title = "Index";
+}
+<p>
+    @Html.ActionLink("添加类别", "Create", null, new { @class = "btn" })
+</p>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>
+                名称
+            </th>
+            <th>
+                描述
+            </th>
+            <th>
+                操作
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TypeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.ActionLink("修改", "Edit", new { id = item.ProblemTypeID }) |
+                    @Html.ActionLink("详细信息", "Details", new { id = item.ProblemTypeID }) |
+                    @Html.ActionLink("删除", "Delete", new { id = item.ProblemTypeID })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

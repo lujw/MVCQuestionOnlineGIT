@@ -1,0 +1,245 @@
+﻿@using res = Resource.Views.Account.Account;
+@model YQBlog.Models.UserProfileModel  
+@{
+    ViewBag.Title = "User";
+}
+@section Css{
+    <link href="@Url.Content("~/Content/themes/base/jquery.ui.all.input.css")" rel="stylesheet" type="text/css" />
+}
+    <script type="text/javascript">
+        function $$(id) {
+            return document.getElementById(id);
+        }
+        var userAgent = navigator.userAgent.toLowerCase();
+        var is_opera = userAgent.indexOf('opera') != -1 && opera.version();
+        var is_moz = (navigator.product == 'Gecko') && userAgent.substr(userAgent.indexOf('firefox') + 8, 3);
+        var is_ie = (userAgent.indexOf('msie') != -1 && !is_opera) && userAgent.substr(userAgent.indexOf('msie') + 5, 3);
+        var is_mac = userAgent.indexOf('mac') != -1;
+        function AC_GetArgs(args, classid, mimeType) {
+            var ret = new Object();
+            ret.embedAttrs = new Object();
+            ret.params = new Object();
+            ret.objAttrs = new Object();
+            for (var i = 0; i < args.length; i = i + 2) {
+                var currArg = args[i].toLowerCase();
+                switch (currArg) {
+                    case "classid": break;
+                    case "pluginspage": ret.embedAttrs[args[i]] = 'http://www.macromedia.com/go/getflashplayer'; break;
+                    case "src": ret.embedAttrs[args[i]] = args[i + 1]; ret.params["movie"] = args[i + 1]; break;
+                    case "codebase": ret.objAttrs[args[i]] = 'http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0'; break;
+                    case "onafterupdate": case "onbeforeupdate": case "onblur": case "oncellchange": case "onclick": case "ondblclick": case "ondrag": case "ondragend":
+                    case "ondragenter": case "ondragleave": case "ondragover": case "ondrop": case "onfinish": case "onfocus": case "onhelp": case "onmousedown":
+                    case "onmouseup": case "onmouseover": case "onmousemove": case "onmouseout": case "onkeypress": case "onkeydown": case "onkeyup": case "onload":
+                    case "onlosecapture": case "onpropertychange": case "onreadystatechange": case "onrowsdelete": case "onrowenter": case "onrowexit": case "onrowsinserted": case "onstart":
+                    case "onscroll": case "onbeforeeditfocus": case "onactivate": case "onbeforedeactivate": case "ondeactivate": case "type":
+                    case "id": ret.objAttrs[args[i]] = args[i + 1]; break;
+                    case "width": case "height": case "align": case "vspace": case "hspace": case "class": case "title": case "accesskey": case "name":
+                    case "tabindex": ret.embedAttrs[args[i]] = ret.objAttrs[args[i]] = args[i + 1]; break;
+                    default: ret.embedAttrs[args[i]] = ret.params[args[i]] = args[i + 1];
+                }
+            }
+            ret.objAttrs["classid"] = classid;
+            if (mimeType) {
+                ret.embedAttrs["type"] = mimeType;
+            }
+            return ret;
+        }
+        function AC_FL_RunContent() {
+            var ret = AC_GetArgs(arguments, "clsid:d27cdb6e-ae6d-11cf-96b8-444553540000", "application/x-shockwave-flash");
+            var str = '';
+            if (is_ie && !is_opera) {
+                str += '<object ';
+                for (var i in ret.objAttrs) {
+                    str += i + '="' + ret.objAttrs[i] + '" ';
+                }
+                str += '>';
+                for (var i in ret.params) {
+                    str += '<param name="' + i + '" value="' + ret.params[i] + '" /> ';
+                }
+                str += '</object>';
+            } else {
+                str += '<embed ';
+                for (var i in ret.embedAttrs) {
+                    str += i + '="' + ret.embedAttrs[i] + '" ';
+                }
+                str += '></embed>';
+            }
+            return str;
+        }
+    </script>
+<h2 class="utitle">@ViewBag.uid</h2>
+<div id="ucenter">
+    <div class="uoperation">
+        <ul>
+            <li class="u_index tabbtn u_current">@res.BasicInformation</li>
+            <li class="u_avatar tabbtn">@res.UploadAvatar</li>
+            <li class="u_profile tabbtn">@res.ModifyInformation</li>
+            <li class="u_comment tabbtn">@res.MyComments</li>
+            <li class="u_note tabbtn">@res.MyMessages</li>
+        </ul>
+    </div>
+    <div class="ucontent">
+    <!--UserMain-->
+<div class="tabitem" style="display:block;">
+<div class="uitem">@(res.BasicInformation)</div>
+<div class="uinfo">
+    <ul>
+        <li>
+        <img id="uavatar" onerror="this.onerror=null;this.src='/Content/Avatar/upload/avatars/noavatar_medium.gif';" />
+        </li>
+        <li>
+        @Html.LabelFor(m => m.NickName):
+        @Model.NickName
+        </li>
+        <li>
+        @Html.LabelFor(m => m.Gender):
+        @ViewBag.GenderInfo
+        </li>
+        <li>
+        @Html.LabelFor(m => m.Birth):
+        @Model.Birth
+        </li>
+        <li>
+        @Html.LabelFor(m => m.Location):
+        @Model.Location
+        </li>
+        <li>
+        @Html.LabelFor(m => m.Website):
+        @Model.Website
+        </li>
+        <li>
+        @Html.LabelFor(m => m.QQ):
+        @Model.QQ
+        </li>
+        <li>
+        @Html.LabelFor(m => m.Sina):
+        @Model.Sina
+        </li>
+        <li>
+        @Html.LabelFor(m => m.Facebook):
+        @Model.Facebook
+        </li>
+        <li>
+        @Html.LabelFor(m => m.Twitter):
+        @Model.Twitter
+        </li>
+        <li>
+        @Html.LabelFor(m => m.Phone):
+        @Model.Phone
+        </li>
+        <li>
+        @Html.LabelFor(m => m.Intro):
+        <br/>
+        @Html.Raw(Model.Intro)
+        </li>
+        <li>
+        @Html.LabelFor(m => m.Signature):
+        <br/>
+        @Html.Raw(Model.Signature)
+        </li>
+    </ul>
+</div>
+</div>
+<!--UserAvatar-->
+<div class="tabitem">
+<div class="uitem">@(res.UploadAvatar)</div>
+<table cellspacing="0" cellpadding="0" >
+	<tbody>
+	<tr>
+		<th></th>
+		<td>				
+		<div class="avatararea clearfix">
+            <p><img id="avatar" onerror="this.onerror=null;this.src='/Content/Avatar/upload/avatars/noavatar_medium.gif';" /></p>
+            <p><a href="javascript:;" onclick="$$('avatarctrl').style.display = ''" class="btna">@res.UploadAvatar</a></p>
+        </div>
+        <div id="avatarctrl" style="display: none">
+            <script type="text/javascript">
+                document.write(AC_FL_RunContent('width', '540', 'height', '253', 'scale', 'exactfit', 'src', '@ViewBag.avatarFlashParam', 'id', 'mycamera', 'name', 'mycamera', 'quality', 'high', 'bgcolor', '#ffffff', 'wmode', 'transparent', 'menu', 'false', 'swLiveConnect', 'true', 'allowScriptAccess', 'always'));
+            </script>
+        </div>
+        <script type="text/javascript">
+            function updateavatar(sender, args) {
+                $$('avatar').src = '@(ViewBag.Localhost)/Content/Avatar/upload/avatars/@(ViewBag.uid)/medium.jpg?random=1' + Math.random();
+                $$('avatarctrl').style.display = 'none';
+            }
+            updateavatar();
+        </script>    
+        </td>           
+	</tr>	
+	</tbody>
+</table>
+</div>
+    <!--UserProfile-->
+    <div class="tabitem">
+    @Html.Action("MyProfile", "Account")
+    </div>
+    <!--UserComment-->
+    <div id="usercomment" class="tabitem"></div>
+    <!--UserNote-->
+    <div id="usernote" class="tabitem"></div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $("#ucenter .tabbtn").click(function () {
+            var index = $("#ucenter .tabbtn").index($(this));
+            $(this).addClass("u_current").siblings("li").removeClass("u_current");
+            $($("#ucenter .tabitem").get(index)).show().siblings(".tabitem").hide();
+        });
+
+        $(".u_comment").click(function () {
+            GetUserComment(1);
+        });
+
+        $(".u_note").click(function () {
+            GetUserNote(1);
+        });
+        RefreshAvatar();
+
+        //评论翻页
+        $(".mycomment a").live("click", function () {
+            GetUserComment($(this).attr("p"));
+        });
+
+        //留言翻页
+        $(".mynote a").live("click", function () {
+            GetUserNote($(this).attr("p"));
+        });
+
+    });
+
+    //刷新头像
+    function RefreshAvatar() {
+        $('#uavatar').attr("src", '@(ViewBag.Localhost)/Content/Avatar/upload/avatars/@(ViewBag.uid)/medium.jpg?random=1' + Math.random());
+    }
+
+    //异步读取用户评论
+    function GetUserComment(pageno) {
+        $('#usercomment').html('loading...');
+        $.get(urlPath + "Account/UserCommentList/", { pageNo: pageno, rn: Math.random() }, function (re) {
+            $("#usercomment").html(re);
+        })
+    }
+
+    //异步读取用户留言
+    function GetUserNote(pageno) {
+        $('#usernote').html('loading...');
+        $.get(urlPath + "Account/UserNoteList/", { pageNo: pageno, rn: Math.random() }, function (re) {
+            $("#usernote").html(re);
+        })
+    }
+
+    //用户信息修改提示
+    function UserProfileSubmitSuccess(re) {
+        if (re == 0) {
+            //$('#AjaxResult').show().html("Success").hide(3000);
+            window.location.reload();
+        }
+        else {
+            window.location.href = "#AjaxResult";
+            $('#AjaxResult').show().html("Failed").hide(3000);
+            $('#profileloading').hide();
+        }
+    }
+
+</script>

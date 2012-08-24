@@ -1,0 +1,161 @@
+﻿@model Mvc3QA.Models.Pts_Records
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Pts_Records</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RecordID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RecordID)
+            @Html.ValidationMessageFor(model => model.RecordID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProblemID, "Pts_Problems")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("ProblemID", String.Empty)
+            @Html.ValidationMessageFor(model => model.ProblemID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CreateUser)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CreateUser)
+            @Html.ValidationMessageFor(model => model.CreateUser)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CreateTime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CreateTime)
+            @Html.ValidationMessageFor(model => model.CreateTime)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Content)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Content)
+            @Html.ValidationMessageFor(model => model.Content)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProblemStateID, "Pts_ProblemState")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("ProblemStateID", String.Empty)
+            @Html.ValidationMessageFor(model => model.ProblemStateID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RecordClass)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RecordClass)
+            @Html.ValidationMessageFor(model => model.RecordClass)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SrcStateID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SrcStateID)
+            @Html.ValidationMessageFor(model => model.SrcStateID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SrcUserID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SrcUserID)
+            @Html.ValidationMessageFor(model => model.SrcUserID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Course)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Course)
+            @Html.ValidationMessageFor(model => model.Course)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AssignType)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AssignType)
+            @Html.ValidationMessageFor(model => model.AssignType)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AssignStateID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AssignStateID)
+            @Html.ValidationMessageFor(model => model.AssignStateID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AssignToObjectID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AssignToObjectID)
+            @Html.ValidationMessageFor(model => model.AssignToObjectID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AssignTo)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AssignTo)
+            @Html.ValidationMessageFor(model => model.AssignTo)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ResponseWorkTime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ResponseWorkTime)
+            @Html.ValidationMessageFor(model => model.ResponseWorkTime)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ResponseTotalTime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ResponseTotalTime)
+            @Html.ValidationMessageFor(model => model.ResponseTotalTime)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RealTimeCost)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.RealTimeCost)
+            @Html.ValidationMessageFor(model => model.RealTimeCost)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

@@ -1,0 +1,55 @@
+﻿@using (Html.BeginForm("Details", "Admin", FormMethod.Post, new { @class = "form-horizontal" }))
+                    {        
+                        <fieldset>
+                            <legend>处理问题</legend>
+                            <div id="AjaxResult">
+                                <div class="control-group">
+                                    <label class="control-label">
+                                        处理方式</label>
+                                    <div class="controls">
+                                        <label class="radio">
+                                            <input type="radio" name="AssignType" id="dealing" value="1" checked="">
+                                            直接解决
+                                        </label>
+                                        <label class="radio">
+                                            <input type="radio" name="AssignType" id="transmit" value="2">
+                                            转交其他人处理
+                                        </label>
+                                        <label class="radio">
+                                            <input type="radio" name="AssignType" id="nodealing" value="3">
+                                            不解决
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="control-group" id="AssignedToDiv" style="display: none;">
+                                    <div class="control-label">
+                                        选择问题接收人或部门
+                                    </div>
+                                    <div class="controls">
+                                        @Html.DropDownList("AssignTo")<select id="LastUser" name="LastUser"></select>
+                                    </div>
+                                </div>
+                                <input type="hidden" value="@Model.ProblemID" name="ProblemID"
+                                id="ProblemID" data-val-required="问题ID 字段是必需的。" data-val="true">
+                                <div class="control-group">
+                                    <div class="control-label">
+                                        <label for="Content">
+                                            处理意见</label>
+                                    </div>
+                                    <div class="controls">
+                                        <textarea style="width: 650px; height: 300px" rows="2" name="Content" id="Content"
+                                            data-val-required="必须填写回复意见" data-val="true" cols="20"></textarea>
+                                        <span data-valmsg-replace="true" data-valmsg-for="Content" class="field-validation-valid">
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="submit" class="btn btn-primary" id="BtnSubmit" name="BtnSubmit">
+                                        保存</button>
+                                    <span style="display: none;" id="Loading">提交中...</span>
+                                    <button class="btn">
+                                        取消</button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    }
